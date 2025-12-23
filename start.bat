@@ -1,0 +1,1 @@
+C:\Users\andrea.cerrato\.jdks\jbr-17.0.14\bin\java -jar .\build\libs\ciams-1.0.jar --server.port=8080
