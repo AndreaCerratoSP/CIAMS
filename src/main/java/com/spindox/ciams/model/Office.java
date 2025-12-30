@@ -17,6 +17,6 @@ public class Office {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "office", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "office")
     private List<Asset> assets;
 }

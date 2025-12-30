@@ -21,16 +21,16 @@ public class Asset {
     @Column (name = "acquisition_date")
     private Date acquisitionDate;
 
-    @ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "office_id")
     private Office office;
 
-    @ManyToOne (cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToOne
     @JoinColumn(name = "asset_type_id")
     private AssetType assetType;
 
 
-    @ManyToMany (cascade = {CascadeType.PERSIST, CascadeType.MERGE} )
+    @ManyToMany
     @JoinTable(
             name = "asset_licence",
             joinColumns = @JoinColumn(name = "asset_id"),

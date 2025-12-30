@@ -19,6 +19,6 @@ public class AssetType {
         @Column (name = "description")
         private String description;
 
-        @OneToMany(mappedBy = "assetType", cascade = CascadeType.ALL)
+        @OneToMany(mappedBy = "assetType")
         private List<Asset> assets;
 }

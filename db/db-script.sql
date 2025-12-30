@@ -1,7 +1,7 @@
 -- Schema for CIAMS project
 
 -- Drop shcema inventory
-DROP SCHEMA IF EXISTS inventory;
+DROP SCHEMA IF EXISTS inventory CASCADE;
 
 -- Create schema inventory
 CREATE SCHEMA IF NOT EXISTS inventory
@@ -18,7 +18,7 @@ DROP TABLE IF EXISTS inventory.office;
 CREATE TABLE inventory.office (
 	id SERIAL,
 	name VARCHAR(100) NOT NULL
-)
+);
 
 ALTER TABLE inventory.office ADD CONSTRAINT office_pk PRIMARY KEY (id);
 ALTER TABLE inventory.office ADD CONSTRAINT office_name_unique UNIQUE (name);
@@ -29,7 +29,7 @@ CREATE TABLE inventory.asset_type (
 	id SERIAL,
 	name VARCHAR(100) NOT NULL,
 	description VARCHAR(200)
-)
+);
 
 ALTER TABLE inventory.asset_type ADD CONSTRAINT asset_type_pk PRIMARY KEY (id);
 
@@ -41,7 +41,7 @@ CREATE TABLE inventory.asset (
 	acquisition_date DATE,
 	office_id INTEGER NOT NULL,
 	asset_type_id INTEGER NOT NULL
-)
+);
 
 ALTER TABLE inventory.asset ADD CONSTRAINT asset_pk PRIMARY KEY (id);
 ALTER TABLE inventory.asset ADD CONSTRAINT asset_sn_unique UNIQUE (serial_number);
@@ -54,7 +54,7 @@ CREATE TABLE inventory.software_license (
 	id SERIAL,
 	name VARCHAR(100) NOT NULL,
 	expire_date DATE NOT NULL
-)
+);
 
 ALTER TABLE inventory.software_license ADD CONSTRAINT software_license_pk PRIMARY KEY (id);
 
@@ -63,10 +63,10 @@ ALTER TABLE inventory.software_license ADD CONSTRAINT software_license_pk PRIMAR
 CREATE TABLE inventory.asset_licence (
 	asset_id INTEGER NOT NULL,
 	licence_id INTEGER NOT NULL
-)
+);
 
 ALTER TABLE inventory.asset_licence ADD CONSTRAINT asset_licence_pk PRIMARY KEY (asset_id, licence_id);
-ALTER TABLE inventory.asset_licence ADD CONSTRAINT al_asset_fk FOREIGN KEY (asset_id) REFERENCES inventory.asset(id);
-ALTER TABLE inventory.asset_licence ADD CONSTRAINT al_licence_fk FOREIGN KEY (licence_id) REFERENCES inventory.software_license(id);
+ALTER TABLE inventory.asset_licence ADD CONSTRAINT al_asset_fk FOREIGN KEY (asset_id) REFERENCES inventory.asset(id) ON DELETE CASCADE;
+ALTER TABLE inventory.asset_licence ADD CONSTRAINT al_licence_fk FOREIGN KEY (licence_id) REFERENCES inventory.software_license(id) ON DELETE CASCADE;
 
 

@@ -1,13 +1,11 @@
 package com.spindox.ciams.repository;
 
+import com.spindox.ciams.model.AssetType;
 import com.spindox.ciams.model.Office;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
-
 @Repository
-public interface OfficeRepository extends JpaRepository<Office, Long> {
+public interface AssetTypeRepository extends JpaRepository<AssetType, Long> {
 
-    public Optional<Office> findOfficeByName(String name);
 }
