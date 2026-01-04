@@ -12,5 +12,5 @@ public class SoftwareLicenseDto {
     private String name;
     private Date expireDate;
 
-    private List<AssetDto> assets;
+    //private List<AssetDto> assets;
 }

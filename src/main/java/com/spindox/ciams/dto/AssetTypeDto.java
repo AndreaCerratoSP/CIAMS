@@ -13,5 +13,5 @@ public class AssetTypeDto {
     private String name;
     private String description;
 
-    private List<AssetDto> assets;
+    //private List<AssetDto> assets;
 }

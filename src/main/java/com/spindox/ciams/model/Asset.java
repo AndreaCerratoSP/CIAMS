@@ -33,6 +33,7 @@ public class Asset {
     @ManyToMany
     @JoinTable(
             name = "asset_licence",
+            schema = "inventory",
             joinColumns = @JoinColumn(name = "asset_id"),
             inverseJoinColumns = @JoinColumn(name = "licence_id")
     )

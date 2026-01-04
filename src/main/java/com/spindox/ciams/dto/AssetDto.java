@@ -12,7 +12,7 @@ public class AssetDto {
     private String serialNumber;
     private Date acquisitionDate;
     private OfficeDto office;
-
     private AssetTypeDto assetType;
+
     private List<SoftwareLicenseDto> softwareLicenses;
 }

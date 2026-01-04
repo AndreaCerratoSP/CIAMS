@@ -5,7 +5,6 @@ import com.spindox.ciams.service.AssetTypeService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -37,12 +36,9 @@ public class AssetTypeController {
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<AssetTypeDto> getAssetTypeByName(@PathVariable String name) {
-        try {
-            return ResponseEntity.ok(service.getAssetTypeByName(name));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<List<AssetTypeDto>> getAssetTypeByName(@PathVariable String name) {
+
+        return ResponseEntity.ok(service.getAssetTypeByName(name));
     }
 
     @PostMapping
@@ -53,7 +49,7 @@ public class AssetTypeController {
         return ResponseEntity.ok(service.saveAssetType(assetType));
     }
 
-    @PutMapping("/")
+    @PutMapping("/{id}")
     public ResponseEntity<AssetTypeDto> updateAssetType(@RequestBody AssetTypeDto assetType, @PathVariable Long id) {
         if(AssetTypeIsNotValid(assetType)) {
             return  ResponseEntity.badRequest().build();
@@ -62,10 +58,10 @@ public class AssetTypeController {
         try{
             AssetTypeDto newAssetType = service.getAssetTypeById(id);
             newAssetType.setName(assetType.getName());
-
+            newAssetType.setDescription(assetType.getDescription());
             return ResponseEntity.ok(service.saveAssetType(newAssetType));
         } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.notFound().build();
         }
     }
 

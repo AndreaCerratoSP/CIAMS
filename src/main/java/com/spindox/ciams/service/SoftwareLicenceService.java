@@ -8,6 +8,10 @@ import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
@@ -76,14 +80,22 @@ public class SoftwareLicenceService {
      * @return the dto of the license
      * @throws EntityNotFoundException when the license doesn't get found
      */
-    public SoftwareLicenseDto getLicenseByName(String name) throws EntityNotFoundException {
+    public List<SoftwareLicenseDto> getLicenseByName(String name) throws EntityNotFoundException {
 
-        Optional<SoftwareLicense> licenseOpt = softwareLicenseRepository.findSoftwareLicenseByName(name);
-        if (licenseOpt.isPresent()) {
-            return softwareLicenseMapper.toDto(licenseOpt.get());
-        } else {
-            throw new EntityNotFoundException("SoftwareLicense with name " + name + " not found");
-        }
+        List<SoftwareLicense> Listlicense = softwareLicenseRepository.findSoftwareLicenseByNameContainingOrderByName(name);
+        return softwareLicenseMapper.toDto(Listlicense);
+    }
+
+    public List<SoftwareLicenseDto> getLicenseWithExpiringDates() {
+
+        Instant today = Instant.now();
+        Instant in30   = today.plus(30, ChronoUnit.DAYS);
+        Timestamp start = Timestamp.from(today);
+        Timestamp end   = Timestamp.from(in30);
+
+        List<SoftwareLicense> licenses = softwareLicenseRepository.findSoftwareLicenseByExpireDateBetween(start, end);
+
+        return softwareLicenseMapper.toDto(licenses);
     }
 
 }

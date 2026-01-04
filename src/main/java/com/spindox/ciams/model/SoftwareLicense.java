@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @Entity
-@Table (name = "software_licence", schema = "inventory")
+@Table (name = "software_license", schema = "inventory")
 public class SoftwareLicense {
 
         @Id

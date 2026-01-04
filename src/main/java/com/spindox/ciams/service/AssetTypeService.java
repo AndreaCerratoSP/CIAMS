@@ -51,20 +51,10 @@ public class AssetTypeService {
         assetTypeRepository.delete(assetType);
     }
 
-    public AssetTypeDto getAssetTypeByName(String name) throws EntityNotFoundException {
+    public List<AssetTypeDto> getAssetTypeByName(String name) {
         System.out.println("Dentro service");
-        Optional<AssetType> assetOpt =  assetTypeRepository.findAssetTypeByName(name);
-        if(assetOpt.isPresent()){
-            AssetType assetType = assetOpt.get();
-            System.out.println("Dentro service, trovato");
-            return assetTypeMapper.toDto(assetType);
-        }
-        else{
-            System.out.println("Dentro service, non trovato");
-            throw  new EntityNotFoundException("Office with name " + name + " not found");
-        }
-
-
+        List<AssetType> assetTypeList =  assetTypeRepository.findAssetTypeByNameOrderByName(name);
+        return assetTypeMapper.toDto(assetTypeList);
     }
 
 }

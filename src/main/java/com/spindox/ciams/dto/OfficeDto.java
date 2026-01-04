@@ -14,5 +14,5 @@ public class OfficeDto {
     private Long id;
     private String name;
 
-    private List<AssetDto> assets;
+    //private List<AssetDto> assets;
 }

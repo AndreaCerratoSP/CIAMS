@@ -5,7 +5,6 @@ import com.spindox.ciams.service.SoftwareLicenceService;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -14,7 +13,7 @@ import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/softwarelicences")
-public class SoftwareLicenceController {
+public class SoftwareLicenseController {
 
     @Autowired
     SoftwareLicenceService service;
@@ -32,17 +31,19 @@ public class SoftwareLicenceController {
     }
 
     @GetMapping("/name/{name}")
-    public ResponseEntity<SoftwareLicenseDto> getSoftwareLicenseByName(@PathVariable String name) {
-        try {
-            return ResponseEntity.ok(service.getLicenseByName(name));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<List<SoftwareLicenseDto>> getSoftwareLicenseByName(@PathVariable String name) {
+
+        return ResponseEntity.ok(service.getLicenseByName(name));
     }
 
     @GetMapping("/")
     public ResponseEntity<List<SoftwareLicenseDto>> getAllSoftwareLicense() {
         return ResponseEntity.ok(service.getAllLicenses());
+    }
+
+    @GetMapping("/expiring")
+    public ResponseEntity<List<SoftwareLicenseDto>> getExpireDate() {
+        return ResponseEntity.ok(service.getLicenseWithExpiringDates());
     }
 
 
@@ -63,10 +64,10 @@ public class SoftwareLicenceController {
         try{
             SoftwareLicenseDto newLicence = service.getLicenseById(id);
             newLicence.setName(licence.getName());
-
+            newLicence.setExpireDate(licence.getExpireDate());
             return ResponseEntity.ok(service.saveLicense(newLicence));
         } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.notFound().build();
         }
 
     }
@@ -84,7 +85,7 @@ public class SoftwareLicenceController {
 
 
     private boolean LicenceIsNotValid(SoftwareLicenseDto licence) {
-        if(licence.getName() == null || licence.getName().equals("")) {
+        if(licence.getName() == null || licence.getName().equals("") || licence.getExpireDate() == null) {
             return true;
         }
         return false;

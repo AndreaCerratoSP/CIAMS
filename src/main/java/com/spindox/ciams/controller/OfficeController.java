@@ -64,7 +64,7 @@ public class OfficeController {
 
             return ResponseEntity.ok(service.saveOffice(newOffice));
         } catch (EntityNotFoundException e) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+            return ResponseEntity.notFound().build();
         }
 
     }
