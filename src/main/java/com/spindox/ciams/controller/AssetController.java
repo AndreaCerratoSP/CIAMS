@@ -7,10 +7,14 @@ import com.spindox.ciams.service.AssetService;
 import com.spindox.ciams.service.AssetTypeService;
 import com.spindox.ciams.service.OfficeService;
 import com.spindox.ciams.service.SoftwareLicenceService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.persistence.EntityNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -33,6 +37,40 @@ public class AssetController {
     @Autowired
     private SoftwareLicenceService licenseService;
 
+    /**
+     * Retrieves a single asset by ID.
+     *
+     * @param id the unique identifier of the asset to retrieve
+     * @return 200 with the AssetDto on success,
+     *         404 if the asset does not exist,
+     *         401 if unauthorized
+     * @throws EntityNotFoundException if the asset is not found
+     */
+    @Operation(
+            summary = "Get an asset by ID",
+            description = "Fetches the asset identified by the given ID and returns the resource.",
+            security = { @SecurityRequirement(name = "basicAuth") },
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Asset successfully retrieved",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = AssetDto.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "Unauthorized",
+                            content = @Content
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Asset not found",
+                            content = @Content
+                    )
+            }
+    )
     @GetMapping("/{id}")
     public ResponseEntity<AssetDto> getAssetById(@PathVariable Long id) throws EntityNotFoundException {
 
@@ -42,6 +80,47 @@ public class AssetController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    /**
+     * Retrieves a single asset by serial number.
+     *
+     * @param serialnumber the serial number of the asset to retrieve
+     * @return 200 with the AssetDto on success,
+     *         400 if the serial number is invalid,
+     *         404 if the asset does not exist,
+     *         401 if unauthorized
+     * @throws EntityNotFoundException if the asset is not found
+     */
+    @Operation(
+            summary = "Get an asset by serial number",
+            description = "Fetches the asset identified by the given serial number and returns the resource.",
+            security = { @SecurityRequirement(name = "basicAuth") },
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Asset successfully retrieved",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = AssetDto.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "Invalid serial number",
+                            content = @Content
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "Unauthorized",
+                            content = @Content
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Asset not found",
+                            content = @Content
+                    )
+            }
+    )
 
     @GetMapping("/serialnumber/{serialnumber}")
     public ResponseEntity<AssetDto> getAssetBySerialNumber(@PathVariable String serialnumber) throws EntityNotFoundException {
@@ -120,7 +199,7 @@ public class AssetController {
         return ResponseEntity.ok(service.saveAsset(assetDto));
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     public ResponseEntity<AssetDto> deleteAsset(@PathVariable Long id) throws EntityNotFoundException {
         try {
             service.deleteAsset(id);

@@ -5,12 +5,14 @@ import com.spindox.ciams.mapper.OfficeMapper;
 import com.spindox.ciams.model.Office;
 import com.spindox.ciams.repository.OfficeRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class OfficeService {
 
@@ -39,15 +41,13 @@ public class OfficeService {
      */
     public OfficeDto getOfficeById(Long id) throws EntityNotFoundException{
 
-        System.out.println("Dentro service");
         Optional<Office> officeOpt =  officeRepository.findById(id);
         if(officeOpt.isPresent()){
             Office office = officeOpt.get();
-            System.out.println("Dentro service, trovato");
             return officeMapper.toDto(office);
         }
         else{
-            System.out.println("Dentro service, non trovato");
+            log.error("Office not found with id {}", id);
             throw  new EntityNotFoundException("Office with id " + id + " not found");
         }
 
