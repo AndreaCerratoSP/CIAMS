@@ -7,6 +7,7 @@ import com.spindox.ciams.repository.AssetTypeRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +28,7 @@ public class AssetTypeService {
      *
      * @return a list of all the asset types
      */
+    @Cacheable(value = "AssetTypes" )
     public List<AssetTypeDto> getAllAssetTypes(){
 
         log.info("Inside the service, getAllAssetTypes method");
@@ -41,6 +43,7 @@ public class AssetTypeService {
      * @return the found asset type
      * @throws EntityNotFoundException when the asset type is not found
      */
+    @Cacheable(value = "AssetTypes", key = "#id")
     public AssetTypeDto getAssetTypeById(Long id) throws EntityNotFoundException {
 
         log.info("Inside the service, getAssetTypeById method");
@@ -88,6 +91,7 @@ public class AssetTypeService {
      * @return the asset type found
      * @throws EntityNotFoundException when the asset type is not found
      */
+    @Cacheable(value = "AssetTypes", key = "#name")
     public List<AssetTypeDto> getAssetTypeByName(String name) throws EntityNotFoundException {
 
         List<AssetType> assetTypeList =  assetTypeRepository.findAssetTypeByNameOrderByName(name);

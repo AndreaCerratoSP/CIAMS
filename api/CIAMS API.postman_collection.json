@@ -1,0 +1,3894 @@
+{
+	"info": {
+		"_postman_id": "278ad7e9-025a-4a74-9c33-b57149e0b191",
+		"name": "CIAMS API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50719481"
+	},
+	"item": [
+		{
+			"name": "softwarelicences",
+			"item": [
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "Get software license by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/softwarelicences/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"softwarelicences",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7841",
+											"description": "Software license identifier"
+										}
+									]
+								},
+								"description": "Returns the details of the software license associated with the specified ID."
+							},
+							"response": [
+								{
+									"name": "Software license found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/softwarelicences/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"softwarelicences",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Software license identifier"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": 4961,\n  \"name\": \"string\",\n  \"expireDate\": \"1992-04-01T23:45:05.111Z\"\n}"
+								},
+								{
+									"name": "Invalid ID",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/softwarelicences/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"softwarelicences",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Software license identifier"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Software license not found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/softwarelicences/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"softwarelicences",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Software license identifier"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Update a software license by ID",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 4961,\n  \"name\": \"string\",\n  \"expireDate\": \"1992-04-01T23:45:05.111Z\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/softwarelicences/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"softwarelicences",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7841",
+											"description": "Software license identifier"
+										}
+									]
+								},
+								"description": "Updates the software license identified by the given ID with the provided details and returns the updated resource."
+							},
+							"response": [
+								{
+									"name": "Software license successfully updated",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 4961,\n  \"name\": \"string\",\n  \"expireDate\": \"1992-04-01T23:45:05.111Z\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/softwarelicences/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"softwarelicences",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Software license identifier"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": 4961,\n  \"name\": \"string\",\n  \"expireDate\": \"1992-04-01T23:45:05.111Z\"\n}"
+								},
+								{
+									"name": "Invalid ID or request body",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 4961,\n  \"name\": \"string\",\n  \"expireDate\": \"1992-04-01T23:45:05.111Z\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/softwarelicences/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"softwarelicences",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Software license identifier"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 4961,\n  \"name\": \"string\",\n  \"expireDate\": \"1992-04-01T23:45:05.111Z\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/softwarelicences/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"softwarelicences",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Software license identifier"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Software license not found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 4961,\n  \"name\": \"string\",\n  \"expireDate\": \"1992-04-01T23:45:05.111Z\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/softwarelicences/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"softwarelicences",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Software license identifier"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Delete a software license by ID",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/softwarelicences/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"softwarelicences",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7841",
+											"description": "Software license identifier"
+										}
+									]
+								},
+								"description": "Deletes the software license identified by the given ID."
+							},
+							"response": [
+								{
+									"name": "Software license successfully deleted",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/softwarelicences/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"softwarelicences",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Software license identifier"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/softwarelicences/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"softwarelicences",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Software license identifier"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Software license not found",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/softwarelicences/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"softwarelicences",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Software license identifier"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "name",
+					"item": [
+						{
+							"name": "{name}",
+							"item": [
+								{
+									"name": "Get software licenses by name",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/softwarelicences/name/:name",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"softwarelicences",
+												"name",
+												":name"
+											],
+											"variable": [
+												{
+													"key": "name",
+													"value": "Visual Studio",
+													"description": "Software license name to search for"
+												}
+											]
+										},
+										"description": "Returns a list of software licenses whose name matches the specified value."
+									},
+									"response": [
+										{
+											"name": "Licenses retrieved successfully",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/softwarelicences/name/:name",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"softwarelicences",
+														"name",
+														":name"
+													],
+													"variable": [
+														{
+															"key": "name",
+															"value": "Visual Studio",
+															"description": "Software license name to search for"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"id\": 5604,\n    \"name\": \"string\",\n    \"expireDate\": \"1966-03-12T15:19:43.403Z\"\n  },\n  {\n    \"id\": 6557,\n    \"name\": \"string\",\n    \"expireDate\": \"2018-03-01T07:03:56.309Z\"\n  }\n]"
+										},
+										{
+											"name": "Invalid name",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/softwarelicences/name/:name",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"softwarelicences",
+														"name",
+														":name"
+													],
+													"variable": [
+														{
+															"key": "name",
+															"value": "Visual Studio",
+															"description": "Software license name to search for"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "No licenses found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/softwarelicences/name/:name",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"softwarelicences",
+														"name",
+														":name"
+													],
+													"variable": [
+														{
+															"key": "name",
+															"value": "Visual Studio",
+															"description": "Software license name to search for"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "expiring",
+					"item": [
+						{
+							"name": "Get expiring software licenses",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/softwarelicences/expiring",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"softwarelicences",
+										"expiring"
+									]
+								},
+								"description": "Returns a list of software licenses that are approaching their expiration date."
+							},
+							"response": [
+								{
+									"name": "List of expiring software licenses retrieved successfully",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/softwarelicences/expiring",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"softwarelicences",
+												"expiring"
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "[\n  {\n    \"id\": 5604,\n    \"name\": \"string\",\n    \"expireDate\": \"1966-03-12T15:19:43.403Z\"\n  },\n  {\n    \"id\": 6557,\n    \"name\": \"string\",\n    \"expireDate\": \"2018-03-01T07:03:56.309Z\"\n  }\n]"
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Get all software licenses",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/softwarelicences/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"softwarelicences",
+								""
+							]
+						},
+						"description": "Returns a list of all software licenses available in the system."
+					},
+					"response": [
+						{
+							"name": "List of software licenses retrieved successfully",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/softwarelicences/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"softwarelicences",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": 5604,\n    \"name\": \"string\",\n    \"expireDate\": \"1966-03-12T15:19:43.403Z\"\n  },\n  {\n    \"id\": 6557,\n    \"name\": \"string\",\n    \"expireDate\": \"2018-03-01T07:03:56.309Z\"\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create a new software license",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 4961,\n  \"name\": \"string\",\n  \"expireDate\": \"1992-04-01T23:45:05.111Z\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/softwarelicences/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"softwarelicences",
+								""
+							]
+						},
+						"description": "Creates a new software license using the provided details and returns the created resource."
+					},
+					"response": [
+						{
+							"name": "Software license successfully created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 4961,\n  \"name\": \"string\",\n  \"expireDate\": \"1992-04-01T23:45:05.111Z\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/softwarelicences/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"softwarelicences",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 4961,\n  \"name\": \"string\",\n  \"expireDate\": \"1992-04-01T23:45:05.111Z\"\n}"
+						},
+						{
+							"name": "Invalid request body",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 4961,\n  \"name\": \"string\",\n  \"expireDate\": \"1992-04-01T23:45:05.111Z\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/softwarelicences/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"softwarelicences",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 4961,\n  \"name\": \"string\",\n  \"expireDate\": \"1992-04-01T23:45:05.111Z\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/softwarelicences/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"softwarelicences",
+										""
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "offices",
+			"item": [
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "Get office by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/offices/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"offices",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7841",
+											"description": "Office identifier"
+										}
+									]
+								},
+								"description": "Returns the details of the office associated with the specified ID."
+							},
+							"response": [
+								{
+									"name": "Office found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/offices/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"offices",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Office identifier"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": 7454,\n  \"name\": \"string\"\n}"
+								},
+								{
+									"name": "Invalid ID",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/offices/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"offices",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Office identifier"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Office not found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/offices/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"offices",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Office identifier"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Update an office by ID",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 7454,\n  \"name\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/offices/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"offices",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7841",
+											"description": "Office identifier"
+										}
+									]
+								},
+								"description": "Updates the office identified by the given ID with the provided details and returns the updated resource."
+							},
+							"response": [
+								{
+									"name": "Office successfully updated",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 7454,\n  \"name\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/offices/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"offices",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Office identifier"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": 7454,\n  \"name\": \"string\"\n}"
+								},
+								{
+									"name": "Invalid ID or request body",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 7454,\n  \"name\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/offices/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"offices",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Office identifier"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 7454,\n  \"name\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/offices/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"offices",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Office identifier"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Office not found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 7454,\n  \"name\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/offices/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"offices",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Office identifier"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Delete an office by ID",
+							"request": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "{{baseUrl}}/offices/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"offices",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7841",
+											"description": "Office identifier"
+										}
+									]
+								},
+								"description": "Deletes the office identified by the given ID."
+							},
+							"response": [
+								{
+									"name": "Office successfully deleted",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/offices/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"offices",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Office identifier"
+												}
+											]
+										}
+									},
+									"status": "No Content",
+									"code": 204,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/offices/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"offices",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Office identifier"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Office not found",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/offices/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"offices",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Office identifier"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "name",
+					"item": [
+						{
+							"name": "{name}",
+							"item": [
+								{
+									"name": "Get office by name",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/offices/name/:name",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"offices",
+												"name",
+												":name"
+											],
+											"variable": [
+												{
+													"key": "name",
+													"value": "Headquarters",
+													"description": "Office name"
+												}
+											]
+										},
+										"description": "Returns the details of the office associated with the specified name."
+									},
+									"response": [
+										{
+											"name": "Office found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/offices/name/:name",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"offices",
+														"name",
+														":name"
+													],
+													"variable": [
+														{
+															"key": "name",
+															"value": "Headquarters",
+															"description": "Office name"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": 7454,\n  \"name\": \"string\"\n}"
+										},
+										{
+											"name": "Invalid name",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/offices/name/:name",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"offices",
+														"name",
+														":name"
+													],
+													"variable": [
+														{
+															"key": "name",
+															"value": "Headquarters",
+															"description": "Office name"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Office not found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/offices/name/:name",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"offices",
+														"name",
+														":name"
+													],
+													"variable": [
+														{
+															"key": "name",
+															"value": "Headquarters",
+															"description": "Office name"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Get all offices",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/offices/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"offices",
+								""
+							]
+						},
+						"description": "Returns a list of all offices available in the system."
+					},
+					"response": [
+						{
+							"name": "List of offices retrieved successfully",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/offices/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"offices",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 7454,\n  \"name\": \"string\"\n}"
+						}
+					]
+				},
+				{
+					"name": "Create a new office",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 7454,\n  \"name\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/offices/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"offices",
+								""
+							]
+						},
+						"description": "Creates a new office using the provided details and returns the created resource."
+					},
+					"response": [
+						{
+							"name": "Office successfully created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 7454,\n  \"name\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/offices/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"offices",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 7454,\n  \"name\": \"string\"\n}"
+						},
+						{
+							"name": "Invalid request body",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 7454,\n  \"name\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/offices/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"offices",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Authentication Failed",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 7454,\n  \"name\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/offices/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"offices",
+										""
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "assets",
+			"item": [
+				{
+					"name": "remove-software",
+					"item": [
+						{
+							"name": "Remove software from an asset",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/assets/remove-software?assetId=7841&licenseId=7841",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"assets",
+										"remove-software"
+									],
+									"query": [
+										{
+											"key": "assetId",
+											"value": "7841"
+										},
+										{
+											"key": "licenseId",
+											"value": "7841"
+										}
+									]
+								},
+								"description": "Uninstalls (unassigns) the software license identified by licenseId from the asset identified by assetId and returns the updated resource."
+							},
+							"response": [
+								{
+									"name": "Software successfully removed from asset",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/assets/remove-software?assetId=7841&licenseId=7841",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												"remove-software"
+											],
+											"query": [
+												{
+													"key": "assetId",
+													"value": "7841"
+												},
+												{
+													"key": "licenseId",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": 3753,\n  \"serialNumber\": \"string\",\n  \"acquisitionDate\": \"2003-03-13T10:41:45.777Z\",\n  \"office\": {\n    \"id\": 8834,\n    \"name\": \"string\"\n  },\n  \"assetType\": {\n    \"id\": 4647,\n    \"name\": \"string\",\n    \"description\": \"string\"\n  },\n  \"softwareLicenses\": [\n    {\n      \"id\": 5164,\n      \"name\": \"string\",\n      \"expireDate\": \"1972-12-16T02:45:52.446Z\"\n    },\n    {\n      \"id\": 1448,\n      \"name\": \"string\",\n      \"expireDate\": \"1971-11-12T17:04:50.398Z\"\n    }\n  ]\n}"
+								},
+								{
+									"name": "Invalid request parameters",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/assets/remove-software?assetId=7841&licenseId=7841",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												"remove-software"
+											],
+											"query": [
+												{
+													"key": "assetId",
+													"value": "7841"
+												},
+												{
+													"key": "licenseId",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/assets/remove-software?assetId=7841&licenseId=7841",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												"remove-software"
+											],
+											"query": [
+												{
+													"key": "assetId",
+													"value": "7841"
+												},
+												{
+													"key": "licenseId",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Asset or license not found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/assets/remove-software?assetId=7841&licenseId=7841",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												"remove-software"
+											],
+											"query": [
+												{
+													"key": "assetId",
+													"value": "7841"
+												},
+												{
+													"key": "licenseId",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "move",
+					"item": [
+						{
+							"name": "Move an asset to a different office",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/assets/move?assetId=7841&officeId=7841",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"assets",
+										"move"
+									],
+									"query": [
+										{
+											"key": "assetId",
+											"value": "7841"
+										},
+										{
+											"key": "officeId",
+											"value": "7841"
+										}
+									]
+								},
+								"description": "Moves the asset identified by assetId to the office identified by officeId and returns the updated resource."
+							},
+							"response": [
+								{
+									"name": "Asset successfully moved",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/assets/move?assetId=7841&officeId=7841",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												"move"
+											],
+											"query": [
+												{
+													"key": "assetId",
+													"value": "7841"
+												},
+												{
+													"key": "officeId",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": 3753,\n  \"serialNumber\": \"string\",\n  \"acquisitionDate\": \"2003-03-13T10:41:45.777Z\",\n  \"office\": {\n    \"id\": 8834,\n    \"name\": \"string\"\n  },\n  \"assetType\": {\n    \"id\": 4647,\n    \"name\": \"string\",\n    \"description\": \"string\"\n  },\n  \"softwareLicenses\": [\n    {\n      \"id\": 5164,\n      \"name\": \"string\",\n      \"expireDate\": \"1972-12-16T02:45:52.446Z\"\n    },\n    {\n      \"id\": 1448,\n      \"name\": \"string\",\n      \"expireDate\": \"1971-11-12T17:04:50.398Z\"\n    }\n  ]\n}"
+								},
+								{
+									"name": "Invalid request parameters",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/assets/move?assetId=7841&officeId=7841",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												"move"
+											],
+											"query": [
+												{
+													"key": "assetId",
+													"value": "7841"
+												},
+												{
+													"key": "officeId",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/assets/move?assetId=7841&officeId=7841",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												"move"
+											],
+											"query": [
+												{
+													"key": "assetId",
+													"value": "7841"
+												},
+												{
+													"key": "officeId",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Asset or office not found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/assets/move?assetId=7841&officeId=7841",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												"move"
+											],
+											"query": [
+												{
+													"key": "assetId",
+													"value": "7841"
+												},
+												{
+													"key": "officeId",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "install-software",
+					"item": [
+						{
+							"name": "Install software on an asset",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/assets/install-software?assetId=7841&licenseId=7841",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"assets",
+										"install-software"
+									],
+									"query": [
+										{
+											"key": "assetId",
+											"value": "7841"
+										},
+										{
+											"key": "licenseId",
+											"value": "7841"
+										}
+									]
+								},
+								"description": "Installs (assigns) the software license identified by licenseId to the asset identified by assetId and returns the updated resource."
+							},
+							"response": [
+								{
+									"name": "Software successfully installed on asset",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/assets/install-software?assetId=7841&licenseId=7841",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												"install-software"
+											],
+											"query": [
+												{
+													"key": "assetId",
+													"value": "7841"
+												},
+												{
+													"key": "licenseId",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": 3753,\n  \"serialNumber\": \"string\",\n  \"acquisitionDate\": \"2003-03-13T10:41:45.777Z\",\n  \"office\": {\n    \"id\": 8834,\n    \"name\": \"string\"\n  },\n  \"assetType\": {\n    \"id\": 4647,\n    \"name\": \"string\",\n    \"description\": \"string\"\n  },\n  \"softwareLicenses\": [\n    {\n      \"id\": 5164,\n      \"name\": \"string\",\n      \"expireDate\": \"1972-12-16T02:45:52.446Z\"\n    },\n    {\n      \"id\": 1448,\n      \"name\": \"string\",\n      \"expireDate\": \"1971-11-12T17:04:50.398Z\"\n    }\n  ]\n}"
+								},
+								{
+									"name": "Invalid request parameters",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/assets/install-software?assetId=7841&licenseId=7841",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												"install-software"
+											],
+											"query": [
+												{
+													"key": "assetId",
+													"value": "7841"
+												},
+												{
+													"key": "licenseId",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/assets/install-software?assetId=7841&licenseId=7841",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												"install-software"
+											],
+											"query": [
+												{
+													"key": "assetId",
+													"value": "7841"
+												},
+												{
+													"key": "licenseId",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Asset or license not found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/assets/install-software?assetId=7841&licenseId=7841",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												"install-software"
+											],
+											"query": [
+												{
+													"key": "assetId",
+													"value": "7841"
+												},
+												{
+													"key": "licenseId",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "Get an asset by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/assets/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"assets",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7841"
+										}
+									]
+								},
+								"description": "Fetches the asset identified by the given ID and returns the resource."
+							},
+							"response": [
+								{
+									"name": "Asset successfully retrieved",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/assets/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": 3753,\n  \"serialNumber\": \"string\",\n  \"acquisitionDate\": \"2003-03-13T10:41:45.777Z\",\n  \"office\": {\n    \"id\": 8834,\n    \"name\": \"string\"\n  },\n  \"assetType\": {\n    \"id\": 4647,\n    \"name\": \"string\",\n    \"description\": \"string\"\n  },\n  \"softwareLicenses\": [\n    {\n      \"id\": 5164,\n      \"name\": \"string\",\n      \"expireDate\": \"1972-12-16T02:45:52.446Z\"\n    },\n    {\n      \"id\": 1448,\n      \"name\": \"string\",\n      \"expireDate\": \"1971-11-12T17:04:50.398Z\"\n    }\n  ]\n}"
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/assets/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Asset not found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/assets/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Delete an asset by ID",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/assets/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"assets",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7841"
+										}
+									]
+								},
+								"description": "Deletes the asset identified by the given ID and returns the deleted resource."
+							},
+							"response": [
+								{
+									"name": "Asset successfully deleted",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/assets/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": 3753,\n  \"serialNumber\": \"string\",\n  \"acquisitionDate\": \"2003-03-13T10:41:45.777Z\",\n  \"office\": {\n    \"id\": 8834,\n    \"name\": \"string\"\n  },\n  \"assetType\": {\n    \"id\": 4647,\n    \"name\": \"string\",\n    \"description\": \"string\"\n  },\n  \"softwareLicenses\": [\n    {\n      \"id\": 5164,\n      \"name\": \"string\",\n      \"expireDate\": \"1972-12-16T02:45:52.446Z\"\n    },\n    {\n      \"id\": 1448,\n      \"name\": \"string\",\n      \"expireDate\": \"1971-11-12T17:04:50.398Z\"\n    }\n  ]\n}"
+								},
+								{
+									"name": "Invalid ID",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/assets/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/assets/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Asset not found",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/assets/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "serialnumber",
+					"item": [
+						{
+							"name": "{serialnumber}",
+							"item": [
+								{
+									"name": "Get an asset by serial number",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/assets/serialnumber/:serialnumber",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"assets",
+												"serialnumber",
+												":serialnumber"
+											],
+											"variable": [
+												{
+													"key": "serialnumber",
+													"value": "string"
+												}
+											]
+										},
+										"description": "Fetches the asset identified by the given serial number and returns the resource."
+									},
+									"response": [
+										{
+											"name": "Asset successfully retrieved",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/assets/serialnumber/:serialnumber",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"assets",
+														"serialnumber",
+														":serialnumber"
+													],
+													"variable": [
+														{
+															"key": "serialnumber",
+															"value": "string"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "{\n  \"id\": 3753,\n  \"serialNumber\": \"string\",\n  \"acquisitionDate\": \"2003-03-13T10:41:45.777Z\",\n  \"office\": {\n    \"id\": 8834,\n    \"name\": \"string\"\n  },\n  \"assetType\": {\n    \"id\": 4647,\n    \"name\": \"string\",\n    \"description\": \"string\"\n  },\n  \"softwareLicenses\": [\n    {\n      \"id\": 5164,\n      \"name\": \"string\",\n      \"expireDate\": \"1972-12-16T02:45:52.446Z\"\n    },\n    {\n      \"id\": 1448,\n      \"name\": \"string\",\n      \"expireDate\": \"1971-11-12T17:04:50.398Z\"\n    }\n  ]\n}"
+										},
+										{
+											"name": "Invalid serial number",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/assets/serialnumber/:serialnumber",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"assets",
+														"serialnumber",
+														":serialnumber"
+													],
+													"variable": [
+														{
+															"key": "serialnumber",
+															"value": "string"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Unauthorized",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/assets/serialnumber/:serialnumber",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"assets",
+														"serialnumber",
+														":serialnumber"
+													],
+													"variable": [
+														{
+															"key": "serialnumber",
+															"value": "string"
+														}
+													]
+												}
+											},
+											"status": "Unauthorized",
+											"code": 401,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "Asset not found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/assets/serialnumber/:serialnumber",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"assets",
+														"serialnumber",
+														":serialnumber"
+													],
+													"variable": [
+														{
+															"key": "serialnumber",
+															"value": "string"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Get all assets",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/assets/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								""
+							]
+						},
+						"description": "Fetches all assets and returns them as a list."
+					},
+					"response": [
+						{
+							"name": "Assets successfully retrieved",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/assets/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"assets",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": 2810,\n    \"serialNumber\": \"string\",\n    \"acquisitionDate\": \"1963-07-29T00:31:36.611Z\",\n    \"office\": {\n      \"id\": 36,\n      \"name\": \"string\"\n    },\n    \"assetType\": {\n      \"id\": 6026,\n      \"name\": \"string\",\n      \"description\": \"string\"\n    },\n    \"softwareLicenses\": [\n      {\n        \"id\": 7717,\n        \"name\": \"string\",\n        \"expireDate\": \"2024-10-11T03:11:27.261Z\"\n      },\n      {\n        \"id\": 1065,\n        \"name\": \"string\",\n        \"expireDate\": \"1986-06-18T06:25:42.205Z\"\n      }\n    ]\n  },\n  {\n    \"id\": 9600,\n    \"serialNumber\": \"string\",\n    \"acquisitionDate\": \"1951-02-18T08:43:03.791Z\",\n    \"office\": {\n      \"id\": 7631,\n      \"name\": \"string\"\n    },\n    \"assetType\": {\n      \"id\": 433,\n      \"name\": \"string\",\n      \"description\": \"string\"\n    },\n    \"softwareLicenses\": [\n      {\n        \"id\": 903,\n        \"name\": \"string\",\n        \"expireDate\": \"2014-01-01T00:18:41.954Z\"\n      },\n      {\n        \"id\": 5720,\n        \"name\": \"string\",\n        \"expireDate\": \"1973-03-25T12:36:01.376Z\"\n      }\n    ]\n  }\n]"
+						}
+					]
+				},
+				{
+					"name": "Create a new asset",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 3753,\n  \"serialNumber\": \"string\",\n  \"acquisitionDate\": \"2003-03-13T10:41:45.777Z\",\n  \"office\": {\n    \"id\": 8834,\n    \"name\": \"string\"\n  },\n  \"assetType\": {\n    \"id\": 4647,\n    \"name\": \"string\",\n    \"description\": \"string\"\n  },\n  \"softwareLicenses\": [\n    {\n      \"id\": 5164,\n      \"name\": \"string\",\n      \"expireDate\": \"1972-12-16T02:45:52.446Z\"\n    },\n    {\n      \"id\": 1448,\n      \"name\": \"string\",\n      \"expireDate\": \"1971-11-12T17:04:50.398Z\"\n    }\n  ]\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/assets/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"assets",
+								""
+							]
+						},
+						"description": "Creates a new asset using the provided details and returns the created resource."
+					},
+					"response": [
+						{
+							"name": "Asset successfully created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 3753,\n  \"serialNumber\": \"string\",\n  \"acquisitionDate\": \"2003-03-13T10:41:45.777Z\",\n  \"office\": {\n    \"id\": 8834,\n    \"name\": \"string\"\n  },\n  \"assetType\": {\n    \"id\": 4647,\n    \"name\": \"string\",\n    \"description\": \"string\"\n  },\n  \"softwareLicenses\": [\n    {\n      \"id\": 5164,\n      \"name\": \"string\",\n      \"expireDate\": \"1972-12-16T02:45:52.446Z\"\n    },\n    {\n      \"id\": 1448,\n      \"name\": \"string\",\n      \"expireDate\": \"1971-11-12T17:04:50.398Z\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/assets/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"assets",
+										""
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 3753,\n  \"serialNumber\": \"string\",\n  \"acquisitionDate\": \"2003-03-13T10:41:45.777Z\",\n  \"office\": {\n    \"id\": 8834,\n    \"name\": \"string\"\n  },\n  \"assetType\": {\n    \"id\": 4647,\n    \"name\": \"string\",\n    \"description\": \"string\"\n  },\n  \"softwareLicenses\": [\n    {\n      \"id\": 5164,\n      \"name\": \"string\",\n      \"expireDate\": \"1972-12-16T02:45:52.446Z\"\n    },\n    {\n      \"id\": 1448,\n      \"name\": \"string\",\n      \"expireDate\": \"1971-11-12T17:04:50.398Z\"\n    }\n  ]\n}"
+						},
+						{
+							"name": "Invalid request body",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 3753,\n  \"serialNumber\": \"string\",\n  \"acquisitionDate\": \"2003-03-13T10:41:45.777Z\",\n  \"office\": {\n    \"id\": 8834,\n    \"name\": \"string\"\n  },\n  \"assetType\": {\n    \"id\": 4647,\n    \"name\": \"string\",\n    \"description\": \"string\"\n  },\n  \"softwareLicenses\": [\n    {\n      \"id\": 5164,\n      \"name\": \"string\",\n      \"expireDate\": \"1972-12-16T02:45:52.446Z\"\n    },\n    {\n      \"id\": 1448,\n      \"name\": \"string\",\n      \"expireDate\": \"1971-11-12T17:04:50.398Z\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/assets/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"assets",
+										""
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 3753,\n  \"serialNumber\": \"string\",\n  \"acquisitionDate\": \"2003-03-13T10:41:45.777Z\",\n  \"office\": {\n    \"id\": 8834,\n    \"name\": \"string\"\n  },\n  \"assetType\": {\n    \"id\": 4647,\n    \"name\": \"string\",\n    \"description\": \"string\"\n  },\n  \"softwareLicenses\": [\n    {\n      \"id\": 5164,\n      \"name\": \"string\",\n      \"expireDate\": \"1972-12-16T02:45:52.446Z\"\n    },\n    {\n      \"id\": 1448,\n      \"name\": \"string\",\n      \"expireDate\": \"1971-11-12T17:04:50.398Z\"\n    }\n  ]\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/assets/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"assets",
+										""
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "AssetTypes",
+			"item": [
+				{
+					"name": "{id}",
+					"item": [
+						{
+							"name": "Get asset type by ID",
+							"request": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/AssetTypes/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"AssetTypes",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7841",
+											"description": "Asset type identifier"
+										}
+									]
+								},
+								"description": "Returns the details of the asset type associated with the specified ID."
+							},
+							"response": [
+								{
+									"name": "Asset type found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/AssetTypes/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"AssetTypes",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Asset type identifier"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": 14,\n  \"name\": \"string\",\n  \"description\": \"string\"\n}"
+								},
+								{
+									"name": "Invalid ID",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/AssetTypes/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"AssetTypes",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Asset type identifier"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Asset type not found",
+									"originalRequest": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/AssetTypes/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"AssetTypes",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841",
+													"description": "Asset type identifier"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Update an existing asset type",
+							"request": {
+								"method": "PUT",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 14,\n  \"name\": \"string\",\n  \"description\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/AssetTypes/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"AssetTypes",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7841"
+										}
+									]
+								},
+								"description": "Updates the asset type identified by the given ID using the provided details and returns the updated resource."
+							},
+							"response": [
+								{
+									"name": "Asset type successfully updated",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											},
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 14,\n  \"name\": \"string\",\n  \"description\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/AssetTypes/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"AssetTypes",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": 14,\n  \"name\": \"string\",\n  \"description\": \"string\"\n}"
+								},
+								{
+									"name": "Invalid request body",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 14,\n  \"name\": \"string\",\n  \"description\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/AssetTypes/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"AssetTypes",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "Bad Request",
+									"code": 400,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 14,\n  \"name\": \"string\",\n  \"description\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/AssetTypes/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"AssetTypes",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Asset type not found",
+									"originalRequest": {
+										"method": "PUT",
+										"header": [
+											{
+												"key": "Content-Type",
+												"value": "application/json"
+											}
+										],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n  \"id\": 14,\n  \"name\": \"string\",\n  \"description\": \"string\"\n}",
+											"options": {
+												"raw": {
+													"headerFamily": "json",
+													"language": "json"
+												}
+											}
+										},
+										"url": {
+											"raw": "{{baseUrl}}/AssetTypes/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"AssetTypes",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						},
+						{
+							"name": "Delete an existing asset type",
+							"request": {
+								"method": "DELETE",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/AssetTypes/:id",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"AssetTypes",
+										":id"
+									],
+									"variable": [
+										{
+											"key": "id",
+											"value": "7841"
+										}
+									]
+								},
+								"description": "Deletes the asset type identified by the given ID and returns the deleted resource."
+							},
+							"response": [
+								{
+									"name": "Asset type successfully deleted",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/AssetTypes/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"AssetTypes",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "OK",
+									"code": 200,
+									"_postman_previewlanguage": "json",
+									"header": [
+										{
+											"key": "Content-Type",
+											"value": "application/json"
+										}
+									],
+									"cookie": [],
+									"body": "{\n  \"id\": 14,\n  \"name\": \"string\",\n  \"description\": \"string\"\n}"
+								},
+								{
+									"name": "Unauthorized",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/AssetTypes/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"AssetTypes",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "Unauthorized",
+									"code": 401,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								},
+								{
+									"name": "Asset type not found",
+									"originalRequest": {
+										"method": "DELETE",
+										"header": [],
+										"url": {
+											"raw": "{{baseUrl}}/AssetTypes/:id",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"AssetTypes",
+												":id"
+											],
+											"variable": [
+												{
+													"key": "id",
+													"value": "7841"
+												}
+											]
+										}
+									},
+									"status": "Not Found",
+									"code": 404,
+									"_postman_previewlanguage": "text",
+									"header": [],
+									"cookie": [],
+									"body": ""
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "name",
+					"item": [
+						{
+							"name": "{name}",
+							"item": [
+								{
+									"name": "Get asset types by name",
+									"request": {
+										"method": "GET",
+										"header": [
+											{
+												"key": "Accept",
+												"value": "application/json"
+											}
+										],
+										"url": {
+											"raw": "{{baseUrl}}/AssetTypes/name/:name",
+											"host": [
+												"{{baseUrl}}"
+											],
+											"path": [
+												"AssetTypes",
+												"name",
+												":name"
+											],
+											"variable": [
+												{
+													"key": "name",
+													"value": "Laptop",
+													"description": "Asset type name to search for"
+												}
+											]
+										},
+										"description": "Returns a list of asset types whose name matches the specified value."
+									},
+									"response": [
+										{
+											"name": "Asset types retrieved successfully",
+											"originalRequest": {
+												"method": "GET",
+												"header": [
+													{
+														"key": "Accept",
+														"value": "application/json"
+													}
+												],
+												"url": {
+													"raw": "{{baseUrl}}/AssetTypes/name/:name",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"AssetTypes",
+														"name",
+														":name"
+													],
+													"variable": [
+														{
+															"key": "name",
+															"value": "Laptop",
+															"description": "Asset type name to search for"
+														}
+													]
+												}
+											},
+											"status": "OK",
+											"code": 200,
+											"_postman_previewlanguage": "json",
+											"header": [
+												{
+													"key": "Content-Type",
+													"value": "application/json"
+												}
+											],
+											"cookie": [],
+											"body": "[\n  {\n    \"id\": 4557,\n    \"name\": \"string\",\n    \"description\": \"string\"\n  },\n  {\n    \"id\": 7670,\n    \"name\": \"string\",\n    \"description\": \"string\"\n  }\n]"
+										},
+										{
+											"name": "Invalid name",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/AssetTypes/name/:name",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"AssetTypes",
+														"name",
+														":name"
+													],
+													"variable": [
+														{
+															"key": "name",
+															"value": "Laptop",
+															"description": "Asset type name to search for"
+														}
+													]
+												}
+											},
+											"status": "Bad Request",
+											"code": 400,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										},
+										{
+											"name": "No asset types found",
+											"originalRequest": {
+												"method": "GET",
+												"header": [],
+												"url": {
+													"raw": "{{baseUrl}}/AssetTypes/name/:name",
+													"host": [
+														"{{baseUrl}}"
+													],
+													"path": [
+														"AssetTypes",
+														"name",
+														":name"
+													],
+													"variable": [
+														{
+															"key": "name",
+															"value": "Laptop",
+															"description": "Asset type name to search for"
+														}
+													]
+												}
+											},
+											"status": "Not Found",
+											"code": 404,
+											"_postman_previewlanguage": "text",
+											"header": [],
+											"cookie": [],
+											"body": ""
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Create a new asset type",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							},
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n  \"id\": 14,\n  \"name\": \"string\",\n  \"description\": \"string\"\n}",
+							"options": {
+								"raw": {
+									"headerFamily": "json",
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{baseUrl}}/AssetTypes",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"AssetTypes"
+							]
+						},
+						"description": "Creates a new asset type using the provided details and returns the created resource."
+					},
+					"response": [
+						{
+							"name": "Asset type successfully created",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									},
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 14,\n  \"name\": \"string\",\n  \"description\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/AssetTypes",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"AssetTypes"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "{\n  \"id\": 14,\n  \"name\": \"string\",\n  \"description\": \"string\"\n}"
+						},
+						{
+							"name": "Invalid request body",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 14,\n  \"name\": \"string\",\n  \"description\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/AssetTypes",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"AssetTypes"
+									]
+								}
+							},
+							"status": "Bad Request",
+							"code": 400,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						},
+						{
+							"name": "Unauthorized",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Content-Type",
+										"value": "application/json"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n  \"id\": 14,\n  \"name\": \"string\",\n  \"description\": \"string\"\n}",
+									"options": {
+										"raw": {
+											"headerFamily": "json",
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/AssetTypes",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"AssetTypes"
+									]
+								}
+							},
+							"status": "Unauthorized",
+							"code": 401,
+							"_postman_previewlanguage": "text",
+							"header": [],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "Get all asset types",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json"
+							}
+						],
+						"url": {
+							"raw": "{{baseUrl}}/AssetTypes/",
+							"host": [
+								"{{baseUrl}}"
+							],
+							"path": [
+								"AssetTypes",
+								""
+							]
+						},
+						"description": "Returns a list of all asset types available in the system."
+					},
+					"response": [
+						{
+							"name": "List of asset types retrieved successfully",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json"
+									}
+								],
+								"url": {
+									"raw": "{{baseUrl}}/AssetTypes/",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"AssetTypes",
+										""
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								}
+							],
+							"cookie": [],
+							"body": "[\n  {\n    \"id\": 4557,\n    \"name\": \"string\",\n    \"description\": \"string\"\n  },\n  {\n    \"id\": 7670,\n    \"name\": \"string\",\n    \"description\": \"string\"\n  }\n]"
+						}
+					]
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "baseUrl",
+			"value": "http://localhost:8080"
+		}
+	]
+}

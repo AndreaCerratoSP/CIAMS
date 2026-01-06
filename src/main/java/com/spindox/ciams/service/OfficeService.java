@@ -7,6 +7,7 @@ import com.spindox.ciams.repository.OfficeRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -27,6 +28,8 @@ public class OfficeService {
      *
      * @return List of officies
      */
+
+    @Cacheable(value = "Offices" )
     public List<OfficeDto> getAllOffices(){
         log.info("Inside the service, getAllOffices method");
         List<Office> offices = officeRepository.findAll();
@@ -40,6 +43,7 @@ public class OfficeService {
      * @return the foud office
      * @throws EntityNotFoundException when office is not found
      */
+    @Cacheable(value = "Offices", key = "#id")
     public OfficeDto getOfficeById(Long id) throws EntityNotFoundException{
 
         log.info("Inside the service, getOfficeById method");
@@ -87,6 +91,7 @@ public class OfficeService {
      * @return the dto of the office
      * @throws EntityNotFoundException when the office doesn't get found
      */
+    @Cacheable(value = "Offices", key = "#name")
     public OfficeDto getOfficeByName(String name) throws EntityNotFoundException{
 
         log.info("Inside the service, getOfficeByName method");
