@@ -5,6 +5,7 @@ import com.spindox.ciams.mapper.SoftwareLicenseMapper;
 import com.spindox.ciams.model.SoftwareLicense;
 import com.spindox.ciams.repository.SoftwareLicenseRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -14,6 +15,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class SoftwareLicenceService {
 
@@ -30,6 +32,7 @@ public class SoftwareLicenceService {
      * @return List of software licenses
      */
     public List<SoftwareLicenseDto> getAllLicenses() {
+        log.info("Inside the service, getAllLicenses method");
         List<SoftwareLicense> licenses = softwareLicenseRepository.findAll();
         return softwareLicenseMapper.toDto(licenses);
     }
@@ -42,10 +45,13 @@ public class SoftwareLicenceService {
      * @throws EntityNotFoundException when license is not found
      */
     public SoftwareLicenseDto getLicenseById(Long id) throws EntityNotFoundException {
+        log.info("Inside the service, getLicenseById method");
         Optional<SoftwareLicense> licenseOpt = softwareLicenseRepository.findById(id);
         if (licenseOpt.isPresent()) {
+            log.info("licenseOpt found with id {}", id);
             return softwareLicenseMapper.toDto(licenseOpt.get());
         } else {
+            log.info("licenseOpt not found with id {}", id);
             throw new EntityNotFoundException("SoftwareLicense with id " + id + " not found");
         }
     }
@@ -59,6 +65,7 @@ public class SoftwareLicenceService {
     public SoftwareLicenseDto saveLicense(SoftwareLicenseDto softwareLicenseDto) {
         SoftwareLicense softwareLicense = softwareLicenseMapper.fromDto(softwareLicenseDto);
         softwareLicenseRepository.save(softwareLicense);
+        log.info("softwareLicense saved with id {}", softwareLicense.getId());
         return softwareLicenseMapper.toDto(softwareLicense);
     }
 
@@ -69,6 +76,7 @@ public class SoftwareLicenceService {
      */
     public void deleteLicense(Long id) {
         SoftwareLicense license = softwareLicenseRepository.findById(id).get();
+        log.info("softwareLicense deleted with id {}", id);
         softwareLicenseRepository.delete(license);
     }
 
@@ -80,7 +88,7 @@ public class SoftwareLicenceService {
      * @throws EntityNotFoundException when the license doesn't get found
      */
     public List<SoftwareLicenseDto> getLicenseByName(String name) throws EntityNotFoundException {
-
+        log.info("Inside the service, getLicenseByName method");
         List<SoftwareLicense> Listlicense = softwareLicenseRepository.findSoftwareLicenseByNameContainingOrderByName(name);
         return softwareLicenseMapper.toDto(Listlicense);
     }
@@ -92,13 +100,13 @@ public class SoftwareLicenceService {
      */
     public List<SoftwareLicenseDto> getLicenseWithExpiringDates() {
 
+        log.info("Inside the service, getLicenseWithExpiringDates method");
         Instant today = Instant.now();
         Instant in30   = today.plus(30, ChronoUnit.DAYS);
         Timestamp start = Timestamp.from(today);
         Timestamp end   = Timestamp.from(in30);
 
         List<SoftwareLicense> licenses = softwareLicenseRepository.findSoftwareLicenseByExpireDateBetween(start, end);
-
         return softwareLicenseMapper.toDto(licenses);
     }
 

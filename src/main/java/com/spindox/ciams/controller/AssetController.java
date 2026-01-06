@@ -14,6 +14,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +23,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Slf4j
 @RestController
 @RequestMapping("/assets")
 public class AssetController {
@@ -75,6 +77,7 @@ public class AssetController {
     @GetMapping("/{id}")
     public ResponseEntity<AssetDto> getAssetById(@PathVariable Long id) throws EntityNotFoundException {
 
+        log.info("get an asset by ID {}", id);
         try {
             return ResponseEntity.ok(service.getAssetById(id));
         } catch (EntityNotFoundException e) {
@@ -124,6 +127,8 @@ public class AssetController {
     )
     @GetMapping("/serialnumber/{serialnumber}")
     public ResponseEntity<AssetDto> getAssetBySerialNumber(@PathVariable String serialnumber) throws EntityNotFoundException {
+
+        log.info("get an asset by serial number {}", serialnumber);
         try {
             return ResponseEntity.ok(service.getAssetBySerialNumber(serialnumber));
         } catch (EntityNotFoundException e) {
@@ -153,6 +158,7 @@ public class AssetController {
     )
     @GetMapping("/")
     public ResponseEntity<List<AssetDto>> getAllAssets() throws EntityNotFoundException {
+        log.info("get all assets");
         return ResponseEntity.ok(service.getAllAssets());
     }
 
@@ -202,6 +208,7 @@ public class AssetController {
     )
     @PostMapping("/")
     public ResponseEntity<AssetDto> createAsset(@RequestBody AssetDto assetDto) throws EntityNotFoundException {
+        log.info("create a new asset {}", assetDto);
         if(AssetIsNotValid(assetDto)) {
             return  ResponseEntity.badRequest().build();
         }
@@ -260,6 +267,8 @@ public class AssetController {
 
     @PutMapping("/move")
     public ResponseEntity<AssetDto> moveAsset(@RequestParam Long assetId, @RequestParam Long officeId) throws EntityNotFoundException {
+
+        log.info("move asset {}", assetId);
         AssetDto assetDto;
         OfficeDto officeDto;
         try {
@@ -318,6 +327,7 @@ public class AssetController {
 
     @PutMapping("/install-software")
     public ResponseEntity<AssetDto> installSoftwareAsset(@RequestParam Long assetId, @RequestParam Long licenseId) throws EntityNotFoundException {
+        log.info("install software asset {}", assetId);
         AssetDto assetDto;
         SoftwareLicenseDto softwareLicenseDto;
         try {
@@ -377,6 +387,7 @@ public class AssetController {
     )
     @PutMapping("/remove-software")
     public ResponseEntity<AssetDto> removeSoftwareAsset(@RequestParam Long assetId, @RequestParam Long licenseId) throws EntityNotFoundException {
+        log.info("remove software asset {}", assetId);
         AssetDto assetDto;
         SoftwareLicenseDto softwareLicenseDto;
         try {
@@ -432,6 +443,7 @@ public class AssetController {
     )
     @DeleteMapping("/{id}")
     public ResponseEntity<AssetDto> deleteAsset(@PathVariable Long id) throws EntityNotFoundException {
+        log.info("delete asset {}", id);
         try {
             service.deleteAsset(id);
             return ResponseEntity.ok().build();

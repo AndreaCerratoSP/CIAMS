@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Slf4j
 @RestController
 @RequestMapping("/AssetTypes")
 public class AssetTypeController {
@@ -46,7 +48,7 @@ public class AssetTypeController {
     )
     @GetMapping("/")
     public ResponseEntity<List<AssetTypeDto>> getAllAssetTypes(){
-
+        log.info("Get all the Asset Types");
         return ResponseEntity.ok(service.getAllAssetTypes());
     }
 
@@ -91,7 +93,7 @@ public class AssetTypeController {
     @GetMapping("/{id}")
     public ResponseEntity<AssetTypeDto> getAssetTypeById(@PathVariable long id) {
 
-        System.out.println("Dentro controller id = " + id);
+        log.info("Get asset type by ID {}", id);
         try {
             return ResponseEntity.ok(service.getAssetTypeById(id));
         } catch (EntityNotFoundException e) {
@@ -143,7 +145,7 @@ public class AssetTypeController {
     )
     @GetMapping("/name/{name}")
     public ResponseEntity<List<AssetTypeDto>> getAssetTypeByName(@PathVariable String name) {
-
+        log.info("Get asset type by name {}", name);
         return ResponseEntity.ok(service.getAssetTypeByName(name));
     }
 
@@ -188,6 +190,7 @@ public class AssetTypeController {
     )
     @PostMapping
     public ResponseEntity<AssetTypeDto> createAssetType(@RequestBody AssetTypeDto assetType) {
+        log.info("Create new asset type {}", assetType);
         if(AssetTypeIsNotValid(assetType)) {
             return  ResponseEntity.badRequest().build();
         }
@@ -244,6 +247,7 @@ public class AssetTypeController {
     )
     @PutMapping("/{id}")
     public ResponseEntity<AssetTypeDto> updateAssetType(@RequestBody AssetTypeDto assetType, @PathVariable Long id) {
+        log.info("Update an existing asset type {}", id);
         if(AssetTypeIsNotValid(assetType)) {
             return  ResponseEntity.badRequest().build();
         }
@@ -293,6 +297,7 @@ public class AssetTypeController {
     )
     @DeleteMapping("/{id}")
     public ResponseEntity<AssetTypeDto> deleteAssetType(@PathVariable Long id) {
+        log.info("Delete an existing asset type {}", id);
         try {
             service.deleteAssetType(id);
             return ResponseEntity.ok().build();

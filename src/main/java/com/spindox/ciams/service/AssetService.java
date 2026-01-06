@@ -6,12 +6,14 @@ import com.spindox.ciams.model.Asset;
 import com.spindox.ciams.repository.AssetRepository;
 
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class AssetService {
 
@@ -26,6 +28,7 @@ public class AssetService {
      * @return a list of all the assets
      */
     public List<AssetDto> getAllAssets() {
+        log.info("Inside the service, getAllAssets method");
         List<Asset> assets = assetRepository.findAll();
         return assetMapper.toDto(assets);
     }
@@ -39,15 +42,15 @@ public class AssetService {
      */
     public AssetDto getAssetById(Long id) throws EntityNotFoundException {
 
-        System.out.println("Dentro service");
+        log.info("Inside the service, getAssetById method");
         Optional<Asset> assetOpt =  assetRepository.findById(id);
         if(assetOpt.isPresent()){
             Asset asset = assetOpt.get();
-            System.out.println("Dentro service, trovato");
+            log.info("Asset found with id {}", id);
             return assetMapper.toDto(asset);
         }
         else{
-            System.out.println("Dentro service, non trovato");
+            log.info("Asset not found with id {}", id);
             throw  new EntityNotFoundException("Office with id " + id + " not found");
         }
 
@@ -62,6 +65,7 @@ public class AssetService {
     public AssetDto saveAsset(AssetDto assetDto) {
         Asset asset = assetMapper.fromDto(assetDto);
         assetRepository.save(asset);
+        log.info("Asset saved with id {}", asset.getId());
         return assetMapper.toDto(asset);
     }
 
@@ -72,6 +76,7 @@ public class AssetService {
      */
     public void deleteAsset(Long id) {
         Asset asset = assetRepository.findById(id).get();
+        log.info("Asset deleted with id {}", id);
         assetRepository.delete(asset);
     }
 
@@ -84,12 +89,15 @@ public class AssetService {
      */
     public AssetDto getAssetBySerialNumber(String serialNumber) throws EntityNotFoundException{
 
+        log.info("Inside the service, getAssetBySerialNumber method");
         Optional<Asset> assetOpt =  assetRepository.findAssetBySerialNumber(serialNumber);
         if(assetOpt.isPresent()){
             Asset asset = assetOpt.get();
+            log.info("Asset found with id {}", asset.getId());
             return assetMapper.toDto(asset);
         }
         else{
+            log.info("Asset not found with id {}", serialNumber);
             throw  new EntityNotFoundException("Office with name " + serialNumber + " not found");
         }
     }

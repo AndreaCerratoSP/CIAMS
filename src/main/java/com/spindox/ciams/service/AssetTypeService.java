@@ -5,12 +5,14 @@ import com.spindox.ciams.mapper.AssetTypeMapper;
 import com.spindox.ciams.model.AssetType;
 import com.spindox.ciams.repository.AssetTypeRepository;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Service
 public class AssetTypeService {
 
@@ -26,6 +28,8 @@ public class AssetTypeService {
      * @return a list of all the asset types
      */
     public List<AssetTypeDto> getAllAssetTypes(){
+
+        log.info("Inside the service, getAllAssetTypes method");
         List<AssetType> assetTypes = assetTypeRepository.findAll();
         return assetTypeMapper.toDto(assetTypes);
     }
@@ -39,12 +43,15 @@ public class AssetTypeService {
      */
     public AssetTypeDto getAssetTypeById(Long id) throws EntityNotFoundException {
 
+        log.info("Inside the service, getAssetTypeById method");
         Optional<AssetType> assetOpt =  assetTypeRepository.findById(id);
         if(assetOpt.isPresent()){
             AssetType assetType = assetOpt.get();
+            log.info("assetType found with id {}", id);
             return assetTypeMapper.toDto(assetType);
         }
         else{
+            log.info("assetType not found with id {}", id);
             throw  new EntityNotFoundException("Office with id " + id + " not found");
         }
     }
@@ -58,6 +65,7 @@ public class AssetTypeService {
     public AssetTypeDto saveAssetType(AssetTypeDto assetTypeDto){
         AssetType assetType = assetTypeMapper.fromDto(assetTypeDto);
         assetTypeRepository.save(assetType);
+        log.info("assetType saved with id {}", assetType.getId());
         return assetTypeMapper.toDto(assetType);
     }
 
@@ -70,6 +78,7 @@ public class AssetTypeService {
     public void deleteAssetType(Long id) throws EntityNotFoundException {
         AssetType assetType = assetTypeRepository.findById(id).get();
         assetTypeRepository.delete(assetType);
+        log.info("assetType deleted with id {}", id);
     }
 
     /**
@@ -82,6 +91,7 @@ public class AssetTypeService {
     public List<AssetTypeDto> getAssetTypeByName(String name) throws EntityNotFoundException {
 
         List<AssetType> assetTypeList =  assetTypeRepository.findAssetTypeByNameOrderByName(name);
+        log.info("assetTypeList found with name {}", name);
         return assetTypeMapper.toDto(assetTypeList);
     }
 

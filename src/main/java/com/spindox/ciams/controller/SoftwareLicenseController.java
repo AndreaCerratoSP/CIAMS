@@ -10,6 +10,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.persistence.EntityNotFoundException;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 import java.util.NoSuchElementException;
 
+@Slf4j
 @RestController
 @RequestMapping("/softwarelicences")
 public class SoftwareLicenseController {
@@ -67,8 +69,7 @@ public class SoftwareLicenseController {
     @GetMapping("/{id}")
     public ResponseEntity<SoftwareLicenseDto> getSoftwareLicenseById(@PathVariable Long id) {
 
-
-        System.out.println("Dentro controller id = " + id);
+        log.info("getSoftwareLicenseById {}", id);
         try {
             return ResponseEntity.ok(service.getLicenseById(id));
         } catch (EntityNotFoundException e) {
@@ -120,7 +121,7 @@ public class SoftwareLicenseController {
     )
     @GetMapping("/name/{name}")
     public ResponseEntity<List<SoftwareLicenseDto>> getSoftwareLicenseByName(@PathVariable String name) {
-
+        log.info("getSoftwareLicenseByName {}", name);
         return ResponseEntity.ok(service.getLicenseByName(name));
     }
 
@@ -145,6 +146,7 @@ public class SoftwareLicenseController {
     )
     @GetMapping("/")
     public ResponseEntity<List<SoftwareLicenseDto>> getAllSoftwareLicense() {
+        log.info("getAllSoftwareLicense");
         return ResponseEntity.ok(service.getAllLicenses());
     }
 
@@ -169,6 +171,7 @@ public class SoftwareLicenseController {
     )
     @GetMapping("/expiring")
     public ResponseEntity<List<SoftwareLicenseDto>> getExpireDate() {
+        log.info("getExpireDate");
         return ResponseEntity.ok(service.getLicenseWithExpiringDates());
     }
 
@@ -214,6 +217,7 @@ public class SoftwareLicenseController {
     )
     @PostMapping("/")
     public ResponseEntity<SoftwareLicenseDto> createSoftwareLicense(@RequestBody SoftwareLicenseDto licence) {
+        log.info("createSoftwareLicense {}", licence);
         if(LicenceIsNotValid(licence)) {
             return  ResponseEntity.badRequest().build();
         }
@@ -278,6 +282,7 @@ public class SoftwareLicenseController {
     )
     @PutMapping("/{id}")
     public ResponseEntity<SoftwareLicenseDto> updateSoftwareLicense(@RequestBody SoftwareLicenseDto licence, @PathVariable Long id) {
+        log.info("updateSoftwareLicense {}", licence);
         if(LicenceIsNotValid(licence)) {
             return  ResponseEntity.badRequest().build();
         }
@@ -330,6 +335,7 @@ public class SoftwareLicenseController {
     )
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSoftwareLicence(@PathVariable Long id) {
+        log.info("deleteSoftwareLicence {}", id);
         try {
             service.deleteLicense(id);
             return ResponseEntity.ok().build();

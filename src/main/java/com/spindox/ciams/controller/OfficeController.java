@@ -117,6 +117,7 @@ public class OfficeController {
     )
     @GetMapping("/name/{name}")
     public ResponseEntity<OfficeDto> getOfficesByName(@PathVariable String name) {
+        log.info("Get office by name {}", name);
         try {
             return ResponseEntity.ok(service.getOfficeByName(name));
         } catch (EntityNotFoundException e) {
@@ -145,6 +146,7 @@ public class OfficeController {
     )
     @GetMapping("/")
     public ResponseEntity<List<OfficeDto>> getAllOffices() {
+        log.info("Get all offices");
         return ResponseEntity.ok(service.getAllOffices());
     }
 
@@ -189,6 +191,7 @@ public class OfficeController {
     )
     @PostMapping("/")
     public ResponseEntity<OfficeDto> createOffice(@RequestBody OfficeDto office) {
+        log.info("Create office {}", office);
         if(OfficeIsNotValid(office)) {
             return  ResponseEntity.badRequest().build();
         }
@@ -251,6 +254,7 @@ public class OfficeController {
     )
     @PutMapping("/{id}")
     public ResponseEntity<OfficeDto> updateOffice(@RequestBody OfficeDto office, @PathVariable Long id) {
+        log.info("Update office {}", office);
         if(OfficeIsNotValid(office)) {
             return  ResponseEntity.badRequest().build();
         }
@@ -306,6 +310,7 @@ public class OfficeController {
     )
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteOffice(@PathVariable Long id) {
+        log.info("Delete office {}", id);
         try {
             service.deleteOffice(id);
             return ResponseEntity.ok().build();

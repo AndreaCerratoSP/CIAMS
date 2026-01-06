@@ -28,6 +28,7 @@ public class OfficeService {
      * @return List of officies
      */
     public List<OfficeDto> getAllOffices(){
+        log.info("Inside the service, getAllOffices method");
         List<Office> offices = officeRepository.findAll();
         return officeMapper.toDto(offices);
     }
@@ -41,9 +42,11 @@ public class OfficeService {
      */
     public OfficeDto getOfficeById(Long id) throws EntityNotFoundException{
 
+        log.info("Inside the service, getOfficeById method");
         Optional<Office> officeOpt =  officeRepository.findById(id);
         if(officeOpt.isPresent()){
             Office office = officeOpt.get();
+            log.info("office found with id {}", office.getId());
             return officeMapper.toDto(office);
         }
         else{
@@ -62,6 +65,7 @@ public class OfficeService {
     public OfficeDto saveOffice(OfficeDto officeDto){
         Office office = officeMapper.fromDto(officeDto);
         officeRepository.save(office);
+        log.info("office saved with id {}", office.getId());
         return officeMapper.toDto(office);
     }
 
@@ -72,6 +76,7 @@ public class OfficeService {
      */
     public void deleteOffice(Long id){
         Office office = officeRepository.findById(id).get();
+        log.info("office deleted with id {}", office.getId());
         officeRepository.delete(office);
     }
 
@@ -84,15 +89,15 @@ public class OfficeService {
      */
     public OfficeDto getOfficeByName(String name) throws EntityNotFoundException{
 
-        System.out.println("Dentro service");
+        log.info("Inside the service, getOfficeByName method");
         Optional<Office> officeOpt =  officeRepository.findOfficeByName(name);
         if(officeOpt.isPresent()){
             Office office = officeOpt.get();
-            System.out.println("Dentro service, trovato");
+            log.info("office found with name {}", office.getName());
             return officeMapper.toDto(office);
         }
         else{
-            System.out.println("Dentro service, non trovato");
+            log.error("Office not found with name {}", name);
             throw  new EntityNotFoundException("Office with name " + name + " not found");
         }
 
