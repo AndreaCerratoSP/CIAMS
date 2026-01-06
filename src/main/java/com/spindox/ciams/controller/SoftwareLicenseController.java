@@ -143,7 +143,6 @@ public class SoftwareLicenseController {
                     )
             }
     )
-
     @GetMapping("/")
     public ResponseEntity<List<SoftwareLicenseDto>> getAllSoftwareLicense() {
         return ResponseEntity.ok(service.getAllLicenses());
@@ -213,8 +212,6 @@ public class SoftwareLicenseController {
                     )
             }
     )
-
-
     @PostMapping("/")
     public ResponseEntity<SoftwareLicenseDto> createSoftwareLicense(@RequestBody SoftwareLicenseDto licence) {
         if(LicenceIsNotValid(licence)) {
@@ -279,7 +276,6 @@ public class SoftwareLicenseController {
                     )
             }
     )
-
     @PutMapping("/{id}")
     public ResponseEntity<SoftwareLicenseDto> updateSoftwareLicense(@RequestBody SoftwareLicenseDto licence, @PathVariable Long id) {
         if(LicenceIsNotValid(licence)) {
@@ -332,7 +328,6 @@ public class SoftwareLicenseController {
                             content = @Content)
             }
     )
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteSoftwareLicence(@PathVariable Long id) {
         try {

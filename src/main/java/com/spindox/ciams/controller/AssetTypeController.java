@@ -44,7 +44,6 @@ public class AssetTypeController {
                     )
             }
     )
-
     @GetMapping("/")
     public ResponseEntity<List<AssetTypeDto>> getAllAssetTypes(){
 
@@ -89,7 +88,6 @@ public class AssetTypeController {
                     )
             }
     )
-
     @GetMapping("/{id}")
     public ResponseEntity<AssetTypeDto> getAssetTypeById(@PathVariable long id) {
 
@@ -244,7 +242,6 @@ public class AssetTypeController {
                     )
             }
     )
-
     @PutMapping("/{id}")
     public ResponseEntity<AssetTypeDto> updateAssetType(@RequestBody AssetTypeDto assetType, @PathVariable Long id) {
         if(AssetTypeIsNotValid(assetType)) {

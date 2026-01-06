@@ -65,7 +65,6 @@ public class OfficeController {
                     )
             }
     )
-
     @GetMapping("/{id}")
     public ResponseEntity<OfficeDto> getOfficeById(@PathVariable Long id) {
 
@@ -116,7 +115,6 @@ public class OfficeController {
                     )
             }
     )
-
     @GetMapping("/name/{name}")
     public ResponseEntity<OfficeDto> getOfficesByName(@PathVariable String name) {
         try {
@@ -145,7 +143,6 @@ public class OfficeController {
                     )
             }
     )
-
     @GetMapping("/")
     public ResponseEntity<List<OfficeDto>> getAllOffices() {
         return ResponseEntity.ok(service.getAllOffices());
@@ -190,7 +187,6 @@ public class OfficeController {
                     )
             }
     )
-
     @PostMapping("/")
     public ResponseEntity<OfficeDto> createOffice(@RequestBody OfficeDto office) {
         if(OfficeIsNotValid(office)) {
@@ -253,7 +249,6 @@ public class OfficeController {
                     )
             }
     )
-
     @PutMapping("/{id}")
     public ResponseEntity<OfficeDto> updateOffice(@RequestBody OfficeDto office, @PathVariable Long id) {
         if(OfficeIsNotValid(office)) {
@@ -309,8 +304,6 @@ public class OfficeController {
 
             }
     )
-
-
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteOffice(@PathVariable Long id) {
         try {

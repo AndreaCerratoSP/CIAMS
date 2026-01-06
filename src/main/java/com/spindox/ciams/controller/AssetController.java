@@ -8,6 +8,7 @@ import com.spindox.ciams.service.AssetTypeService;
 import com.spindox.ciams.service.OfficeService;
 import com.spindox.ciams.service.SoftwareLicenceService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -121,7 +122,6 @@ public class AssetController {
                     )
             }
     )
-
     @GetMapping("/serialnumber/{serialnumber}")
     public ResponseEntity<AssetDto> getAssetBySerialNumber(@PathVariable String serialnumber) throws EntityNotFoundException {
         try {
@@ -131,11 +131,75 @@ public class AssetController {
         }
     }
 
+    /**
+     * Retrieves all assets.
+     *
+     * @return 200 with the list of AssetDto on success
+     * @throws EntityNotFoundException (not typically thrown for list endpoints; consider returning 204 instead)
+     */
+    @Operation(
+            summary = "Get all assets",
+            description = "Fetches all assets and returns them as a list.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Assets successfully retrieved",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    array = @ArraySchema(schema = @Schema(implementation = AssetDto.class))
+                            )
+                    )
+            }
+    )
     @GetMapping("/")
     public ResponseEntity<List<AssetDto>> getAllAssets() throws EntityNotFoundException {
         return ResponseEntity.ok(service.getAllAssets());
     }
 
+
+    /**
+     * Creates a new asset.
+     *
+     * @param assetDto the AssetDto containing the asset details to create
+     * @return 201 with the created AssetDto on success,
+     *         400 if the request body is invalid,
+     *         401 if unauthorized,
+     *         409 if a conflicting resource already exists (e.g., duplicate serial number)
+     * @throws EntityNotFoundException if a required related entity is missing (e.g., referenced type not found)
+     */
+    @Operation(
+            summary = "Create a new asset",
+            description = "Creates a new asset using the provided details and returns the created resource.",
+            security = { @SecurityRequirement(name = "basicAuth") },
+            requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
+                    description = "Asset details to create",
+                    required = true,
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = AssetDto.class)
+                    )
+            ),
+            responses = {
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "Asset successfully created",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = AssetDto.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "Invalid request body",
+                            content = @Content
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "Unauthorized",
+                            content = @Content
+                    )
+            }
+    )
     @PostMapping("/")
     public ResponseEntity<AssetDto> createAsset(@RequestBody AssetDto assetDto) throws EntityNotFoundException {
         if(AssetIsNotValid(assetDto)) {
@@ -152,6 +216,47 @@ public class AssetController {
     }
 
 
+    /**
+     * Moves an asset to a different office.
+     *
+     * @param assetId  the unique identifier of the asset to move
+     * @param officeId the unique identifier of the destination office
+     * @return 200 with the updated AssetDto on success,
+     *         400 if one or more parameters are invalid,
+     *         404 if the asset or the office does not exist,
+     *         401 if unauthorized
+     * @throws EntityNotFoundException if the asset or office is not found
+     */
+    @Operation(
+            summary = "Move an asset to a different office",
+            description = "Moves the asset identified by assetId to the office identified by officeId and returns the updated resource.",
+            security = { @SecurityRequirement(name = "basicAuth") },
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Asset successfully moved",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = AssetDto.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "Invalid request parameters",
+                            content = @Content
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "Unauthorized",
+                            content = @Content
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Asset or office not found",
+                            content = @Content
+                    )
+            }
+    )
 
     @PutMapping("/move")
     public ResponseEntity<AssetDto> moveAsset(@RequestParam Long assetId, @RequestParam Long officeId) throws EntityNotFoundException {
@@ -167,6 +272,49 @@ public class AssetController {
 
         return ResponseEntity.ok(service.saveAsset(assetDto));
     }
+
+
+    /**
+     * Installs (assigns) a software license to an asset.
+     *
+     * @param assetId   the unique identifier of the asset where the software will be installed
+     * @param licenseId the unique identifier of the software license to install
+     * @return 200 with the updated AssetDto on success,
+     *         400 if one or more parameters are invalid,
+     *         404 if the asset or the license does not exist,
+     *         401 if unauthorized
+     * @throws EntityNotFoundException if the asset or license is not found
+     */
+    @Operation(
+            summary = "Install software on an asset",
+            description = "Installs (assigns) the software license identified by licenseId to the asset identified by assetId and returns the updated resource.",
+            security = { @SecurityRequirement(name = "basicAuth") },
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Software successfully installed on asset",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = AssetDto.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "Invalid request parameters",
+                            content = @Content
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "Unauthorized",
+                            content = @Content
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Asset or license not found",
+                            content = @Content
+                    )
+            }
+    )
 
     @PutMapping("/install-software")
     public ResponseEntity<AssetDto> installSoftwareAsset(@RequestParam Long assetId, @RequestParam Long licenseId) throws EntityNotFoundException {
@@ -185,6 +333,48 @@ public class AssetController {
         return ResponseEntity.ok(service.saveAsset(assetDto));
     }
 
+
+    /**
+     * Removes (uninstalls) a software license from an asset.
+     *
+     * @param assetId   the unique identifier of the asset from which the software will be removed
+     * @param licenseId the unique identifier of the software license to remove
+     * @return 200 with the updated AssetDto on success,
+     *         400 if one or more parameters are invalid,
+     *         404 if the asset or the license does not exist,
+     *         401 if unauthorized
+     * @throws EntityNotFoundException if the asset or license is not found
+     */
+    @Operation(
+            summary = "Remove software from an asset",
+            description = "Uninstalls (unassigns) the software license identified by licenseId from the asset identified by assetId and returns the updated resource.",
+            security = { @SecurityRequirement(name = "basicAuth") },
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Software successfully removed from asset",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = AssetDto.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "Invalid request parameters",
+                            content = @Content
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "Unauthorized",
+                            content = @Content
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Asset or license not found",
+                            content = @Content
+                    )
+            }
+    )
     @PutMapping("/remove-software")
     public ResponseEntity<AssetDto> removeSoftwareAsset(@RequestParam Long assetId, @RequestParam Long licenseId) throws EntityNotFoundException {
         AssetDto assetDto;
@@ -199,6 +389,47 @@ public class AssetController {
         return ResponseEntity.ok(service.saveAsset(assetDto));
     }
 
+
+    /**
+     * Deletes an existing asset by ID.
+     *
+     * @param id the unique identifier of the asset to delete
+     * @return 200 with the deleted AssetDto on success,
+     *         400 if the ID is invalid,
+     *         404 if the asset does not exist,
+     *         401 if unauthorized
+     * @throws EntityNotFoundException if the asset is not found
+     */
+    @Operation(
+            summary = "Delete an asset by ID",
+            description = "Deletes the asset identified by the given ID and returns the deleted resource.",
+            security = { @SecurityRequirement(name = "basicAuth") },
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Asset successfully deleted",
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = AssetDto.class)
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "400",
+                            description = "Invalid ID",
+                            content = @Content
+                    ),
+                    @ApiResponse(
+                            responseCode = "401",
+                            description = "Unauthorized",
+                            content = @Content
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Asset not found",
+                            content = @Content
+                    )
+            }
+    )
     @DeleteMapping("/{id}")
     public ResponseEntity<AssetDto> deleteAsset(@PathVariable Long id) throws EntityNotFoundException {
         try {

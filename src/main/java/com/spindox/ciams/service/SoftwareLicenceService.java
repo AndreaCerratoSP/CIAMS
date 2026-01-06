@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
@@ -86,6 +85,11 @@ public class SoftwareLicenceService {
         return softwareLicenseMapper.toDto(Listlicense);
     }
 
+    /**
+     * Finds all the software licenses that are expiring in the next 30 days
+     *
+     * @return the list of the software licenses expiring
+     */
     public List<SoftwareLicenseDto> getLicenseWithExpiringDates() {
 
         Instant today = Instant.now();
