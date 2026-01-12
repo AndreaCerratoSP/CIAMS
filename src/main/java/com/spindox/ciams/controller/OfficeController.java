@@ -1,5 +1,6 @@
 package com.spindox.ciams.controller;
 
+import com.spindox.ciams.config.GlobalExceptionHandler;
 import com.spindox.ciams.dto.OfficeDto;
 import com.spindox.ciams.service.OfficeService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -8,8 +9,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
@@ -25,6 +26,9 @@ public class OfficeController {
 
     @Autowired
     private OfficeService service;
+
+    @Autowired
+    private GlobalExceptionHandler exceptionHandler;
 
 
     /**
@@ -67,13 +71,8 @@ public class OfficeController {
     )
     @GetMapping("/{id}")
     public ResponseEntity<OfficeDto> getOfficeById(@PathVariable Long id) {
-
         log.info("Get office by ID {}", id);
-        try {
-            return ResponseEntity.ok(service.getOfficeById(id));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(service.getOfficeById(id));
     }
 
     /**
@@ -118,11 +117,7 @@ public class OfficeController {
     @GetMapping("/name/{name}")
     public ResponseEntity<OfficeDto> getOfficesByName(@PathVariable String name) {
         log.info("Get office by name {}", name);
-        try {
-            return ResponseEntity.ok(service.getOfficeByName(name));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(service.getOfficeByName(name));
     }
 
     /**
@@ -190,11 +185,9 @@ public class OfficeController {
             }
     )
     @PostMapping("/")
-    public ResponseEntity<OfficeDto> createOffice(@RequestBody OfficeDto office) {
+    public ResponseEntity<OfficeDto> createOffice(@RequestBody OfficeDto office) throws BadRequestException {
         log.info("Create office {}", office);
-        if(OfficeIsNotValid(office)) {
-            return  ResponseEntity.badRequest().build();
-        }
+        OfficeIsNotValid(office);
         return ResponseEntity.ok(service.saveOffice(office));
     }
 
@@ -253,21 +246,12 @@ public class OfficeController {
             }
     )
     @PutMapping("/{id}")
-    public ResponseEntity<OfficeDto> updateOffice(@RequestBody OfficeDto office, @PathVariable Long id) {
+    public ResponseEntity<OfficeDto> updateOffice(@RequestBody OfficeDto office, @PathVariable Long id) throws BadRequestException {
         log.info("Update office {}", office);
-        if(OfficeIsNotValid(office)) {
-            return  ResponseEntity.badRequest().build();
-        }
-
-        try{
-            OfficeDto newOffice = service.getOfficeById(id);
-            newOffice.setName(office.getName());
-
-            return ResponseEntity.ok(service.saveOffice(newOffice));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
-
+        OfficeIsNotValid(office);
+        OfficeDto newOffice = service.getOfficeById(id);
+        newOffice.setName(office.getName());
+        return ResponseEntity.ok(service.saveOffice(newOffice));
     }
 
 
@@ -291,7 +275,7 @@ public class OfficeController {
             },
             responses = {
                     @ApiResponse(
-                            responseCode = "204",
+                            responseCode = "200",
                             description = "Office successfully deleted",
                             content = @Content
                     ),
@@ -309,23 +293,22 @@ public class OfficeController {
             }
     )
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteOffice(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteOffice(@PathVariable Long id) throws EmptyResultDataAccessException, NoSuchElementException{
         log.info("Delete office {}", id);
-        try {
-            service.deleteOffice(id);
-            return ResponseEntity.ok().build();
-        } catch (EmptyResultDataAccessException | NoSuchElementException ex) {
-            return ResponseEntity.notFound().build();
-        }
-
+        service.deleteOffice(id);
+        return ResponseEntity.ok().build();
     }
 
-
-    private boolean OfficeIsNotValid(OfficeDto office) {
-        if(office.getName() == null || office.getName().equals("")) {
-            return true;
+    private void OfficeIsNotValid(OfficeDto office) throws BadRequestException {
+        List<OfficeDto> existingOfficies = service.getAllOffices();
+        for (OfficeDto existingOffice : existingOfficies) {
+            if  (existingOffice.getName().equals(office.getName())) {
+                throw  new BadRequestException("Another office with the same name already exists");
+            }
         }
-        return false;
+        if(office.getName() == null || office.getName().equals("")) {
+            throw new BadRequestException("Invalid id: must be a positive number");
+        }
     }
 }
 

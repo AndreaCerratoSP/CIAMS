@@ -13,6 +13,7 @@ import java.time.Duration;
 @Configuration
 @EnableCaching
 public class CacheConfig {
+
     @Bean
     public Caffeine<Object, Object> caffeineConfig() {
         return Caffeine.newBuilder()

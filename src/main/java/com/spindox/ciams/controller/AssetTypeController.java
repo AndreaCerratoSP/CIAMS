@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
@@ -91,14 +92,9 @@ public class AssetTypeController {
             }
     )
     @GetMapping("/{id}")
-    public ResponseEntity<AssetTypeDto> getAssetTypeById(@PathVariable long id) {
-
+    public ResponseEntity<AssetTypeDto> getAssetTypeById(@PathVariable long id) throws  EntityNotFoundException {
         log.info("Get asset type by ID {}", id);
-        try {
-            return ResponseEntity.ok(service.getAssetTypeById(id));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(service.getAssetTypeById(id));
     }
 
 
@@ -189,11 +185,9 @@ public class AssetTypeController {
             }
     )
     @PostMapping
-    public ResponseEntity<AssetTypeDto> createAssetType(@RequestBody AssetTypeDto assetType) {
+    public ResponseEntity<AssetTypeDto> createAssetType(@RequestBody AssetTypeDto assetType) throws BadRequestException {
         log.info("Create new asset type {}", assetType);
-        if(AssetTypeIsNotValid(assetType)) {
-            return  ResponseEntity.badRequest().build();
-        }
+        AssetTypeIsNotValid(assetType);
         return ResponseEntity.ok(service.saveAssetType(assetType));
     }
 
@@ -246,20 +240,13 @@ public class AssetTypeController {
             }
     )
     @PutMapping("/{id}")
-    public ResponseEntity<AssetTypeDto> updateAssetType(@RequestBody AssetTypeDto assetType, @PathVariable Long id) {
+    public ResponseEntity<AssetTypeDto> updateAssetType(@RequestBody AssetTypeDto assetType, @PathVariable Long id) throws BadRequestException {
         log.info("Update an existing asset type {}", id);
-        if(AssetTypeIsNotValid(assetType)) {
-            return  ResponseEntity.badRequest().build();
-        }
-
-        try{
-            AssetTypeDto newAssetType = service.getAssetTypeById(id);
-            newAssetType.setName(assetType.getName());
-            newAssetType.setDescription(assetType.getDescription());
-            return ResponseEntity.ok(service.saveAssetType(newAssetType));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        AssetTypeIsNotValid(assetType);
+        AssetTypeDto newAssetType = service.getAssetTypeById(id);
+        newAssetType.setName(assetType.getName());
+        newAssetType.setDescription(assetType.getDescription());
+        return ResponseEntity.ok(service.saveAssetType(newAssetType));
     }
 
     /**
@@ -298,20 +285,15 @@ public class AssetTypeController {
     @DeleteMapping("/{id}")
     public ResponseEntity<AssetTypeDto> deleteAssetType(@PathVariable Long id) {
         log.info("Delete an existing asset type {}", id);
-        try {
-            service.deleteAssetType(id);
-            return ResponseEntity.ok().build();
-        } catch (EmptyResultDataAccessException | NoSuchElementException ex) {
-            return ResponseEntity.notFound().build();
-        }
+        service.deleteAssetType(id);
+        return ResponseEntity.ok().build();
     }
 
 
-    private boolean AssetTypeIsNotValid(AssetTypeDto assetType) {
+    private void AssetTypeIsNotValid(AssetTypeDto assetType) throws BadRequestException {
         if(assetType.getName() == null || assetType.getName().equals("")) {
-            return true;
+            throw new BadRequestException("Name must not be empty");
         }
-        return false;
     }
 
 }

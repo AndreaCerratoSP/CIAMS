@@ -2,6 +2,7 @@ package com.spindox.ciams.service;
 
 import com.spindox.ciams.dto.SoftwareLicenseDto;
 import com.spindox.ciams.mapper.SoftwareLicenseMapper;
+import com.spindox.ciams.model.Office;
 import com.spindox.ciams.model.SoftwareLicense;
 import com.spindox.ciams.repository.SoftwareLicenseRepository;
 import jakarta.persistence.EntityNotFoundException;
@@ -75,9 +76,17 @@ public class SoftwareLicenceService {
      * @param id is the pk of the license
      */
     public void deleteLicense(Long id) {
-        SoftwareLicense license = softwareLicenseRepository.findById(id).get();
-        log.info("softwareLicense deleted with id {}", id);
-        softwareLicenseRepository.delete(license);
+
+        Optional<SoftwareLicense> licenseOpt =  softwareLicenseRepository.findById(id);
+        if(licenseOpt.isPresent()){
+            SoftwareLicense license = licenseOpt.get();
+            log.info("softwareLicense deleted with id {}", id);
+            softwareLicenseRepository.delete(license);
+        }
+        else{
+            log.error("Office not found with id {}", id);
+            throw  new EntityNotFoundException("softwareLicense with id " + id + " not found");
+        }
     }
 
     /**

@@ -9,8 +9,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
-import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
@@ -68,13 +68,8 @@ public class SoftwareLicenseController {
     )
     @GetMapping("/{id}")
     public ResponseEntity<SoftwareLicenseDto> getSoftwareLicenseById(@PathVariable Long id) {
-
         log.info("getSoftwareLicenseById {}", id);
-        try {
-            return ResponseEntity.ok(service.getLicenseById(id));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(service.getLicenseById(id));
     }
 
 
@@ -106,16 +101,6 @@ public class SoftwareLicenseController {
                                     mediaType = "application/json",
                                     array = @ArraySchema(schema = @Schema(implementation = SoftwareLicenseDto.class))
                             )
-                    ),
-                    @ApiResponse(
-                            responseCode = "400",
-                            description = "Invalid name",
-                            content = @Content
-                    ),
-                    @ApiResponse(
-                            responseCode = "404",
-                            description = "No licenses found",
-                            content = @Content
                     )
             }
     )
@@ -216,11 +201,9 @@ public class SoftwareLicenseController {
             }
     )
     @PostMapping("/")
-    public ResponseEntity<SoftwareLicenseDto> createSoftwareLicense(@RequestBody SoftwareLicenseDto licence) {
+    public ResponseEntity<SoftwareLicenseDto> createSoftwareLicense(@RequestBody SoftwareLicenseDto licence) throws BadRequestException {
         log.info("createSoftwareLicense {}", licence);
-        if(LicenceIsNotValid(licence)) {
-            return  ResponseEntity.badRequest().build();
-        }
+        LicenceIsNotValid(licence);
         return ResponseEntity.ok(service.saveLicense(licence));
     }
 
@@ -281,21 +264,13 @@ public class SoftwareLicenseController {
             }
     )
     @PutMapping("/{id}")
-    public ResponseEntity<SoftwareLicenseDto> updateSoftwareLicense(@RequestBody SoftwareLicenseDto licence, @PathVariable Long id) {
+    public ResponseEntity<SoftwareLicenseDto> updateSoftwareLicense(@RequestBody SoftwareLicenseDto licence, @PathVariable Long id) throws BadRequestException {
         log.info("updateSoftwareLicense {}", licence);
-        if(LicenceIsNotValid(licence)) {
-            return  ResponseEntity.badRequest().build();
-        }
-
-        try{
-            SoftwareLicenseDto newLicence = service.getLicenseById(id);
-            newLicence.setName(licence.getName());
-            newLicence.setExpireDate(licence.getExpireDate());
-            return ResponseEntity.ok(service.saveLicense(newLicence));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
-
+        LicenceIsNotValid(licence);
+        SoftwareLicenseDto newLicence = service.getLicenseById(id);
+        newLicence.setName(licence.getName());
+        newLicence.setExpireDate(licence.getExpireDate());
+        return ResponseEntity.ok(service.saveLicense(newLicence));
     }
 
     /**
@@ -334,23 +309,17 @@ public class SoftwareLicenseController {
             }
     )
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteSoftwareLicence(@PathVariable Long id) {
+    public ResponseEntity<Void> deleteSoftwareLicence(@PathVariable Long id) throws EmptyResultDataAccessException, NoSuchElementException {
         log.info("deleteSoftwareLicence {}", id);
-        try {
             service.deleteLicense(id);
             return ResponseEntity.ok().build();
-        } catch (EmptyResultDataAccessException | NoSuchElementException ex) {
-            return ResponseEntity.notFound().build();
-        }
-
     }
 
 
-    private boolean LicenceIsNotValid(SoftwareLicenseDto licence) {
+    private void LicenceIsNotValid(SoftwareLicenseDto licence) throws BadRequestException {
         if(licence.getName() == null || licence.getName().equals("") || licence.getExpireDate() == null) {
-            return true;
+            throw new BadRequestException("The Licence name and expire date must not be empty");
         }
-        return false;
     }
 
 }

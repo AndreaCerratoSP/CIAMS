@@ -79,9 +79,17 @@ public class OfficeService {
      * @param id is the pk of the office
      */
     public void deleteOffice(Long id){
-        Office office = officeRepository.findById(id).get();
-        log.info("office deleted with id {}", office.getId());
-        officeRepository.delete(office);
+        Optional<Office> officeOpt =  officeRepository.findById(id);
+        if(officeOpt.isPresent()){
+            Office office = officeOpt.get();
+            log.info("office deleted with id {}", office.getId());
+            officeRepository.delete(office);
+        }
+        else{
+            log.error("Office not found with id {}", id);
+            throw  new EntityNotFoundException("Office with id " + id + " not found");
+        }
+
     }
 
     /**

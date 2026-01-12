@@ -75,9 +75,16 @@ public class AssetService {
      * @param id the pk of the asset to cancel
      */
     public void deleteAsset(Long id) {
-        Asset asset = assetRepository.findById(id).get();
-        log.info("Asset deleted with id {}", id);
-        assetRepository.delete(asset);
+        Optional<Asset> assetOpt =  assetRepository.findById(id);
+        if(assetOpt.isPresent()){
+            Asset asset = assetOpt.get();
+            log.info("Asset deleted with id {}", asset.getId());
+            assetRepository.delete(asset);
+        }
+        else{
+            log.error("Asset not found with id {}", id);
+            throw  new EntityNotFoundException("Asset with id " + id + " not found");
+        }
     }
 
     /**

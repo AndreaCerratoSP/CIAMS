@@ -3,6 +3,7 @@ package com.spindox.ciams.service;
 import com.spindox.ciams.dto.AssetTypeDto;
 import com.spindox.ciams.mapper.AssetTypeMapper;
 import com.spindox.ciams.model.AssetType;
+import com.spindox.ciams.model.SoftwareLicense;
 import com.spindox.ciams.repository.AssetTypeRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
@@ -79,9 +80,18 @@ public class AssetTypeService {
      * @throws EntityNotFoundException when the asset type is not found
      */
     public void deleteAssetType(Long id) throws EntityNotFoundException {
-        AssetType assetType = assetTypeRepository.findById(id).get();
-        assetTypeRepository.delete(assetType);
-        log.info("assetType deleted with id {}", id);
+
+
+        Optional<AssetType> assetOpt =  assetTypeRepository.findById(id);
+        if(assetOpt.isPresent()){
+            AssetType assetType = assetOpt.get();
+            log.info("assetType deleted with id {}", id);
+            assetTypeRepository.delete(assetType);
+        }
+        else{
+            log.error("assetType not found with id {}", id);
+            throw  new EntityNotFoundException("assetType with id " + id + " not found");
+        }
     }
 
     /**

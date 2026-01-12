@@ -15,6 +15,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.ResponseEntity;
@@ -76,13 +77,9 @@ public class AssetController {
     )
     @GetMapping("/{id}")
     public ResponseEntity<AssetDto> getAssetById(@PathVariable Long id) throws EntityNotFoundException {
-
         log.info("get an asset by ID {}", id);
-        try {
-            return ResponseEntity.ok(service.getAssetById(id));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(service.getAssetById(id));
+
     }
 
     /**
@@ -129,11 +126,8 @@ public class AssetController {
     public ResponseEntity<AssetDto> getAssetBySerialNumber(@PathVariable String serialnumber) throws EntityNotFoundException {
 
         log.info("get an asset by serial number {}", serialnumber);
-        try {
-            return ResponseEntity.ok(service.getAssetBySerialNumber(serialnumber));
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+        return ResponseEntity.ok(service.getAssetBySerialNumber(serialnumber));
+
     }
 
     /**
@@ -207,18 +201,11 @@ public class AssetController {
             }
     )
     @PostMapping("/")
-    public ResponseEntity<AssetDto> createAsset(@RequestBody AssetDto assetDto) throws EntityNotFoundException {
+    public ResponseEntity<AssetDto> createAsset(@RequestBody AssetDto assetDto) throws EntityNotFoundException, BadRequestException {
         log.info("create a new asset {}", assetDto);
-        if(AssetIsNotValid(assetDto)) {
-            return  ResponseEntity.badRequest().build();
-        }
-        try{
-            officeService.getOfficeById(assetDto.getOffice().getId());
-            assetTypeService.getAssetTypeById(assetDto.getAssetType().getId());
-        } catch(EntityNotFoundException e){
-             return ResponseEntity.badRequest().build();
-        }
-
+        AssetIsNotValid(assetDto);
+        officeService.getOfficeById(assetDto.getOffice().getId());
+        assetTypeService.getAssetTypeById(assetDto.getAssetType().getId());
         return ResponseEntity.ok(service.saveAsset(assetDto));
     }
 
@@ -271,12 +258,8 @@ public class AssetController {
         log.info("move asset {}", assetId);
         AssetDto assetDto;
         OfficeDto officeDto;
-        try {
-            officeDto = officeService.getOfficeById(officeId);
-            assetDto = service.getAssetById(assetId);
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().build();
-        }
+        officeDto = officeService.getOfficeById(officeId);
+        assetDto = service.getAssetById(assetId);
         assetDto.setOffice(officeDto);
 
         return ResponseEntity.ok(service.saveAsset(assetDto));
@@ -330,12 +313,8 @@ public class AssetController {
         log.info("install software asset {}", assetId);
         AssetDto assetDto;
         SoftwareLicenseDto softwareLicenseDto;
-        try {
-            softwareLicenseDto = licenseService.getLicenseById(licenseId);
-            assetDto = service.getAssetById(assetId);
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().build();
-        }
+        softwareLicenseDto = licenseService.getLicenseById(licenseId);
+        assetDto = service.getAssetById(assetId);
 
         if (!assetDto.getSoftwareLicenses().contains(softwareLicenseDto)){
             assetDto.getSoftwareLicenses().add(softwareLicenseDto);
@@ -390,12 +369,8 @@ public class AssetController {
         log.info("remove software asset {}", assetId);
         AssetDto assetDto;
         SoftwareLicenseDto softwareLicenseDto;
-        try {
-            softwareLicenseDto = licenseService.getLicenseById(licenseId);
-            assetDto = service.getAssetById(assetId);
-        } catch (EntityNotFoundException e) {
-            return ResponseEntity.badRequest().build();
-        }
+        softwareLicenseDto = licenseService.getLicenseById(licenseId);
+        assetDto = service.getAssetById(assetId);
         assetDto.getSoftwareLicenses().remove(softwareLicenseDto);
         return ResponseEntity.ok(service.saveAsset(assetDto));
     }
@@ -442,24 +417,18 @@ public class AssetController {
             }
     )
     @DeleteMapping("/{id}")
-    public ResponseEntity<AssetDto> deleteAsset(@PathVariable Long id) throws EntityNotFoundException {
+    public ResponseEntity<AssetDto> deleteAsset(@PathVariable Long id) throws EmptyResultDataAccessException, NoSuchElementException {
         log.info("delete asset {}", id);
-        try {
-            service.deleteAsset(id);
-            return ResponseEntity.ok().build();
-        } catch (EmptyResultDataAccessException | NoSuchElementException ex) {
-            return ResponseEntity.notFound().build();
-        }
+        service.deleteAsset(id);
+        return ResponseEntity.ok().build();
+
     }
 
-
-
-    private boolean AssetIsNotValid(AssetDto asset) {
+    private void AssetIsNotValid(AssetDto asset) throws BadRequestException {
         if(asset.getSerialNumber() == null || asset.getSerialNumber().equals("") ||
                 asset.getAssetType() == null || asset.getAssetType().getId() == null ||
                 asset.getOffice() == null || asset.getOffice().getId() == null) {
-            return true;
+            throw new BadRequestException("Invalid request parameters: Serial number, asset type, and office must exist");
         }
-        return false;
     }
 }
