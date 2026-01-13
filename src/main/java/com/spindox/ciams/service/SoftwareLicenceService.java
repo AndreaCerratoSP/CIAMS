@@ -2,7 +2,6 @@ package com.spindox.ciams.service;
 
 import com.spindox.ciams.dto.SoftwareLicenseDto;
 import com.spindox.ciams.mapper.SoftwareLicenseMapper;
-import com.spindox.ciams.model.Office;
 import com.spindox.ciams.model.SoftwareLicense;
 import com.spindox.ciams.repository.SoftwareLicenseRepository;
 import jakarta.persistence.EntityNotFoundException;

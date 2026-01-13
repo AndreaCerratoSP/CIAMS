@@ -289,7 +289,6 @@ public class AssetTypeController {
         return ResponseEntity.ok().build();
     }
 
-
     private void AssetTypeIsNotValid(AssetTypeDto assetType) throws BadRequestException {
         if(assetType.getName() == null || assetType.getName().equals("")) {
             throw new BadRequestException("Name must not be empty");

@@ -3,7 +3,6 @@ package com.spindox.ciams.service;
 import com.spindox.ciams.dto.AssetTypeDto;
 import com.spindox.ciams.mapper.AssetTypeMapper;
 import com.spindox.ciams.model.AssetType;
-import com.spindox.ciams.model.SoftwareLicense;
 import com.spindox.ciams.repository.AssetTypeRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;

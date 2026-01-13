@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.security.SecurityRequirement;
+import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.coyote.BadRequestException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -300,14 +301,13 @@ public class OfficeController {
     }
 
     private void OfficeIsNotValid(OfficeDto office) throws BadRequestException {
-        List<OfficeDto> existingOfficies = service.getAllOffices();
-        for (OfficeDto existingOffice : existingOfficies) {
-            if  (existingOffice.getName().equals(office.getName())) {
-                throw  new BadRequestException("Another office with the same name already exists");
+        try {
+            service.getOfficeByName(office.getName());
+            throw   new BadRequestException("Office with name " + office.getName() + " already exists");
+        }catch (EntityNotFoundException e){
+            if(office.getName() == null || office.getName().equals("")) {
+                throw new BadRequestException("Invalid office name, it must not be empty");
             }
-        }
-        if(office.getName() == null || office.getName().equals("")) {
-            throw new BadRequestException("Invalid id: must be a positive number");
         }
     }
 }
