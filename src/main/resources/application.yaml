@@ -5,7 +5,7 @@ spring:
   datasource:
     url: jdbc:postgresql://localhost:5432/postgres
     username: invuser
-    password: inventorydbpsw
+    password: inventorypsw
     driver-class-name: org.postgresql.Driver
 
   jpa:

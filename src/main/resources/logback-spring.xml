@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <property name="LOG_FILE" value="C:/tmp/logs/CIAMS.log"/>
+    <property name="LOG_FILE" value="/tmp/logs/CIAMS.log"/>
 
     <appender name="FILE" class="ch.qos.logback.core.rolling.RollingFileAppender">
         <file>${LOG_FILE}</file>
         <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
-            <fileNamePattern>C:/tmp/logs/CIAMS.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <fileNamePattern>/tmp/logs/CIAMS.%d{yyyy-MM-dd}.log</fileNamePattern>
             <maxHistory>30</maxHistory>
         </rollingPolicy>
         <encoder>

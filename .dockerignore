@@ -1,0 +1,14 @@
+# Build outputs
+/.gradle
+
+# VCS
+/.git
+/.gitignore
+
+# IDE
+/.idea
+/.vscode
+*.iml
+
+# OS junk
+.DS_Store
