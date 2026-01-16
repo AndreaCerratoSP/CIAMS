@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  inventory-db:
+    image: docker.io/library/postgres:16
+    container_name: inventory-db_c
+    environment:
+      POSTGRES_USER: invuser
+      POSTGRES_PASSWORD: inventorypsw
+      POSTGRES_DB: inventory-db
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    networks:
+      - inventory-network
+
+  inventory-app:
+    image: inventory_c-img:latest
+    container_name: inventory-app_c
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://inventory-db:5432/inventory-db
+      SPRING_DATASOURCE_USERNAME: invuser
+      SPRING_DATASOURCE_PASSWORD: inventorypsw
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+    ports:
+      - "8080:8080"
+
+    volumes:
+      - C:\tmp\logs:/tmp/logs
+    depends_on:
+      - inventory-db
+    networks:
+      - inventory-network
+
+volumes:
+  pgdata:
+
+networks:
+  inventory-network:
+    driver: bridge
