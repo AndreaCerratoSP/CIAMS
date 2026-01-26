@@ -7,6 +7,7 @@ import com.spindox.ciams.repository.AssetTypeRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -65,6 +66,7 @@ public class AssetTypeService {
      * @param assetTypeDto is the asset type to save
      * @return the asset type saved
      */
+    @CacheEvict(value = "AssetTypes")
     public AssetTypeDto saveAssetType(AssetTypeDto assetTypeDto){
         AssetType assetType = assetTypeMapper.fromDto(assetTypeDto);
         assetTypeRepository.save(assetType);
@@ -78,6 +80,7 @@ public class AssetTypeService {
      * @param id the pk of the asset type to cancel
      * @throws EntityNotFoundException when the asset type is not found
      */
+    @CacheEvict(value = "AssetTypes")
     public void deleteAssetType(Long id) throws EntityNotFoundException {
 
 

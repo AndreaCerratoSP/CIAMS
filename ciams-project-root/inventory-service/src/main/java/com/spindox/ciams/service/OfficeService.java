@@ -7,6 +7,7 @@ import com.spindox.ciams.repository.OfficeRepository;
 import jakarta.persistence.EntityNotFoundException;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
@@ -66,6 +67,7 @@ public class OfficeService {
      * @param officeDto is the dto that get mapped in the entity saved
      * @return that dto of the office
      */
+    @CacheEvict(value = "Offices")
     public OfficeDto saveOffice(OfficeDto officeDto){
         Office office = officeMapper.fromDto(officeDto);
         officeRepository.save(office);
@@ -78,6 +80,7 @@ public class OfficeService {
      *
      * @param id is the pk of the office
      */
+    @CacheEvict(value = "Offices")
     public void deleteOffice(Long id){
         Optional<Office> officeOpt =  officeRepository.findById(id);
         if(officeOpt.isPresent()){
