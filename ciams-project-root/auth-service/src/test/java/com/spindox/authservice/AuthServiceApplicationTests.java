@@ -1,4 +1,4 @@
-package com.spindox.ciams;
+package com.spindox.authservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

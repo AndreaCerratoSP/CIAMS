@@ -1,1 +1,0 @@
-C:\Users\andrea.cerrato\.jdks\jbr-17.0.14\bin\java -jar .\build\libs\auth-service-1.0.jar --server.port=8080
