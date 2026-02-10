@@ -1,0 +1,47 @@
+# Spiegazione Implementazione JWT (JSON Web Token)
+
+## 1. Cos'è?
+È il "passaporto" digitale che rilasciamo all'utente dopo il login. Serve per identificare l'utente nelle richieste successive senza dover rinviare username e password ogni volta.
+
+## 2. Componenti del Progetto
+
+### A. Dipendenze (build.gradle)
+Usiamo la libreria `jjwt` (Java JWT) suddivisa in tre parti (api, impl, jackson) che ci permette di creare, firmare e leggere i token JSON in Java.
+
+### B. Configurazione (application.yaml)
+Qui definiamo le regole base:
+- **jwt.secret**: Una chiave crittografica segreta (una stringa lunga e complessa). Serve a "firmare" il token. Solo chi possiede questa chiave può generare o validare la firma del token.
+- **jwt.expiration**: La durata di validità del token (es. 86400000 ms = 1 giorno).
+
+### C. Il "Fabbro": JwtUtils.java
+È la classe di utilità che compie le operazioni tecniche:
+- **generateToken(username, roles)**:
+  1. Crea il "Payload" (dati utili): username (subject), ruoli (claim personalizzato), data di creazione, data di scadenza.
+  2. Firma il tutto usando l'algoritmo HS256 e la chiave segreta.
+  3. Comprime tutto in una stringa URL-safe.
+- **validateToken(token, username)**: Verifica che la firma sia valida e che il token non sia scaduto.
+- **extractUsername(token)**: Decodifica il token per leggere chi è l'utente.
+
+### D. L'Utilizzatore: AuthService.java
+È il servizio che usa JwtUtils durante il flusso di login:
+1. Riceve le credenziali dall'utente.
+2. Verifica su MongoDB se sono corrette.
+3. Se sì, chiede a `JwtUtils` di generare un token per quell'utente.
+4. Restituisce il token al client dentro un oggetto `AuthResponse`.
+
+## 3. Flusso Schematico (Login)
+
+[CLIENT]                                  [SERVER (Auth Service)]
+   |                                              |
+   | --- 1. POST /login (user, pass) -----------> |
+   |                                              |
+   |                                     2. Verifica Password (BCrypt)
+   |                                     3. Se OK -> Genera JWT (JwtUtils)
+   |                                              |
+   | <-- 4. 200 OK { "token": "eyJh..." } ------- |
+   |                                              |
+
+## 4. Perché è sicuro?
+Il token è **Firmato**.
+- Chiunque può leggere il contenuto (è solo Base64), ma...
+- **Nessuno può modificarlo**: Se un utente malintenzionato prova a cambiare il suo ruolo da "USER" a "ADMIN" dentro il token, la firma matematica finale cambierà. Il server, ricalcolando la firma con la sua chiave segreta, noterà che non corrisponde a quella originale e rifiuterà il token.
