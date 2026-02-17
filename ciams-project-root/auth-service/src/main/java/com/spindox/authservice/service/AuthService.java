@@ -12,6 +12,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -35,10 +36,13 @@ public class AuthService {
         }
 
         String hashedPassword = encoder.encode(userDto.getPassword());
+        List<String> roles = userDto.getRoles() == null || userDto.getRoles().isEmpty()
+                ? List.of("USER")
+                : userDto.getRoles();
         User user = User.builder()
                 .username(userDto.getUsername())
                 .password(hashedPassword)
-                .roles(userDto.getRoles())
+                .roles(roles)
                 .build();
         repository.save(user);
     }
@@ -51,7 +55,10 @@ public class AuthService {
             throw new BadCredentialsException("Invalid username or password");
         }
 
-        String token = jwtUtils.generateToken(user.getUsername(), user.getRoles());
+        List<String> roles = user.getRoles() == null || user.getRoles().isEmpty()
+                ? List.of("USER")
+                : user.getRoles();
+        String token = jwtUtils.generateToken(user.getUsername(), roles);
         return new AuthResponse(token);
     }
 }
