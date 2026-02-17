@@ -2,6 +2,7 @@ package com.spindox.ciams.controller;
 
 import com.spindox.ciams.dto.AssetDto;
 import com.spindox.ciams.dto.OfficeDto;
+import com.spindox.ciams.dto.MessageResponseDTO;
 import com.spindox.ciams.dto.SoftwareLicenseDto;
 import com.spindox.ciams.service.AssetService;
 import com.spindox.ciams.service.AssetTypeService;
@@ -53,7 +54,7 @@ public class AssetController {
     @Operation(
             summary = "Get an asset by ID",
             description = "Fetches the asset identified by the given ID and returns the resource.",
-            security = { @SecurityRequirement(name = "basicAuth") },
+            security = { @SecurityRequirement(name = "bearerAuth") },
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -66,12 +67,18 @@ public class AssetController {
                     @ApiResponse(
                             responseCode = "401",
                             description = "Unauthorized",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "404",
                             description = "Asset not found",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     )
             }
     )
@@ -95,7 +102,7 @@ public class AssetController {
     @Operation(
             summary = "Get an asset by serial number",
             description = "Fetches the asset identified by the given serial number and returns the resource.",
-            security = { @SecurityRequirement(name = "basicAuth") },
+            security = { @SecurityRequirement(name = "bearerAuth") },
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -108,17 +115,26 @@ public class AssetController {
                     @ApiResponse(
                             responseCode = "400",
                             description = "Invalid serial number",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "401",
                             description = "Unauthorized",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "404",
                             description = "Asset not found",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     )
             }
     )
@@ -170,7 +186,7 @@ public class AssetController {
     @Operation(
             summary = "Create a new asset",
             description = "Creates a new asset using the provided details and returns the created resource.",
-            security = { @SecurityRequirement(name = "basicAuth") },
+            security = { @SecurityRequirement(name = "bearerAuth") },
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Asset details to create",
                     required = true,
@@ -191,12 +207,18 @@ public class AssetController {
                     @ApiResponse(
                             responseCode = "400",
                             description = "Invalid request body",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "401",
                             description = "Unauthorized",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     )
             }
     )
@@ -224,7 +246,7 @@ public class AssetController {
     @Operation(
             summary = "Move an asset to a different office",
             description = "Moves the asset identified by assetId to the office identified by officeId and returns the updated resource.",
-            security = { @SecurityRequirement(name = "basicAuth") },
+            security = { @SecurityRequirement(name = "bearerAuth") },
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -237,17 +259,26 @@ public class AssetController {
                     @ApiResponse(
                             responseCode = "400",
                             description = "Invalid request parameters",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "401",
                             description = "Unauthorized",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "404",
                             description = "Asset or office not found",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     )
             }
     )
@@ -280,7 +311,7 @@ public class AssetController {
     @Operation(
             summary = "Install software on an asset",
             description = "Installs (assigns) the software license identified by licenseId to the asset identified by assetId and returns the updated resource.",
-            security = { @SecurityRequirement(name = "basicAuth") },
+            security = { @SecurityRequirement(name = "bearerAuth") },
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -293,17 +324,26 @@ public class AssetController {
                     @ApiResponse(
                             responseCode = "400",
                             description = "Invalid request parameters",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "401",
                             description = "Unauthorized",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "404",
                             description = "Asset or license not found",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     )
             }
     )
@@ -337,7 +377,7 @@ public class AssetController {
     @Operation(
             summary = "Remove software from an asset",
             description = "Uninstalls (unassigns) the software license identified by licenseId from the asset identified by assetId and returns the updated resource.",
-            security = { @SecurityRequirement(name = "basicAuth") },
+            security = { @SecurityRequirement(name = "bearerAuth") },
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -350,17 +390,26 @@ public class AssetController {
                     @ApiResponse(
                             responseCode = "400",
                             description = "Invalid request parameters",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "401",
                             description = "Unauthorized",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "404",
                             description = "Asset or license not found",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     )
             }
     )
@@ -389,7 +438,7 @@ public class AssetController {
     @Operation(
             summary = "Delete an asset by ID",
             description = "Deletes the asset identified by the given ID and returns the deleted resource.",
-            security = { @SecurityRequirement(name = "basicAuth") },
+            security = { @SecurityRequirement(name = "bearerAuth") },
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -402,17 +451,26 @@ public class AssetController {
                     @ApiResponse(
                             responseCode = "400",
                             description = "Invalid ID",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "401",
                             description = "Unauthorized",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "404",
                             description = "Asset not found",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     )
             }
     )

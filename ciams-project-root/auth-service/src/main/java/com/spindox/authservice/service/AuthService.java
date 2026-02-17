@@ -7,6 +7,7 @@ import com.spindox.authservice.model.User;
 import com.spindox.authservice.repository.UserRepository;
 import com.spindox.authservice.util.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -30,7 +31,7 @@ public class AuthService {
     public void register(UserDto userDto) throws Exception {
         Optional<User> existingUser = repository.findByUsername(userDto.getUsername());
         if (existingUser.isPresent()) {
-            throw new Exception(String.format("User with the username '%s' already exists.", userDto.getUsername()));
+            throw new IllegalArgumentException(String.format("User with the username '%s' already exists.", userDto.getUsername()));
         }
 
         String hashedPassword = encoder.encode(userDto.getPassword());
@@ -44,10 +45,10 @@ public class AuthService {
 
     public AuthResponse login(AuthRequest authRequest) throws Exception {
         User user = repository.findByUsername(authRequest.getUsername())
-                .orElseThrow(() -> new Exception("Invalid username or password"));
+                .orElseThrow(() -> new BadCredentialsException("Invalid username or password"));
 
         if (!encoder.matches(authRequest.getPassword(), user.getPassword())) {
-            throw new Exception("Invalid username or password");
+            throw new BadCredentialsException("Invalid username or password");
         }
 
         String token = jwtUtils.generateToken(user.getUsername(), user.getRoles());

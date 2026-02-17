@@ -2,6 +2,7 @@ package com.spindox.ciams.controller;
 
 import com.spindox.ciams.config.GlobalExceptionHandler;
 import com.spindox.ciams.dto.OfficeDto;
+import com.spindox.ciams.dto.MessageResponseDTO;
 import com.spindox.ciams.service.OfficeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -155,7 +156,7 @@ public class OfficeController {
     @Operation(
             summary = "Create a new office",
             description = "Creates a new office using the provided details and returns the created resource.",
-            security = { @SecurityRequirement(name = "basicAuth") },
+            security = { @SecurityRequirement(name = "bearerAuth") },
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Office details to create",
                     required = true,
@@ -176,12 +177,18 @@ public class OfficeController {
                     @ApiResponse(
                             responseCode = "400",
                             description = "Invalid request body",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "401",
                             description = "Authentication Failed",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     )
             }
     )
@@ -203,7 +210,7 @@ public class OfficeController {
     @Operation(
             summary = "Update an office by ID",
             description = "Updates the office identified by the given ID with the provided details and returns the updated resource.",
-            security = { @SecurityRequirement(name = "basicAuth") },
+            security = { @SecurityRequirement(name = "bearerAuth") },
             parameters = {
                     @Parameter(
                             name = "id",
@@ -232,17 +239,26 @@ public class OfficeController {
                     @ApiResponse(
                             responseCode = "400",
                             description = "Invalid ID or request body",
-                            content = @Content // optionally define an ErrorDto schema
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "404",
                             description = "Office not found",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "401",
                             description = "Unauthorized",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     )
             }
     )
@@ -265,7 +281,7 @@ public class OfficeController {
     @Operation(
             summary = "Delete an office by ID",
             description = "Deletes the office identified by the given ID.",
-            security = { @SecurityRequirement(name = "basicAuth") },
+            security = { @SecurityRequirement(name = "bearerAuth") },
             parameters = {
                     @Parameter(
                             name = "id",
@@ -283,12 +299,18 @@ public class OfficeController {
                     @ApiResponse(
                             responseCode = "404",
                             description = "Office not found",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "401",
                             description = "Unauthorized",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     )
 
             }

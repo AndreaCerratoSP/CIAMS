@@ -1,6 +1,7 @@
 package com.spindox.ciams.controller;
 
 import com.spindox.ciams.dto.AssetTypeDto;
+import com.spindox.ciams.dto.MessageResponseDTO;
 import com.spindox.ciams.service.AssetTypeService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -152,7 +153,7 @@ public class AssetTypeController {
     @Operation(
             summary = "Create a new asset type",
             description = "Creates a new asset type using the provided details and returns the created resource.",
-            security = { @SecurityRequirement(name = "basicAuth") },
+            security = { @SecurityRequirement(name = "bearerAuth") },
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Asset type details to create",
                     required = true,
@@ -173,12 +174,18 @@ public class AssetTypeController {
                     @ApiResponse(
                             responseCode = "400",
                             description = "Invalid request body",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "401",
                             description = "Unauthorized",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     )
             }
     )
@@ -202,7 +209,7 @@ public class AssetTypeController {
     @Operation(
             summary = "Update an existing asset type",
             description = "Updates the asset type identified by the given ID using the provided details and returns the updated resource.",
-            security = { @SecurityRequirement(name = "basicAuth") },
+            security = { @SecurityRequirement(name = "bearerAuth") },
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Asset type details to update",
                     required = true,
@@ -223,17 +230,26 @@ public class AssetTypeController {
                     @ApiResponse(
                             responseCode = "400",
                             description = "Invalid request body",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "401",
                             description = "Unauthorized",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "404",
                             description = "Asset type not found",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     )
             }
     )
@@ -258,7 +274,7 @@ public class AssetTypeController {
     @Operation(
             summary = "Delete an existing asset type",
             description = "Deletes the asset type identified by the given ID and returns the deleted resource.",
-            security = { @SecurityRequirement(name = "basicAuth") },
+            security = { @SecurityRequirement(name = "bearerAuth") },
             responses = {
                     @ApiResponse(
                             responseCode = "200",
@@ -271,12 +287,18 @@ public class AssetTypeController {
                     @ApiResponse(
                             responseCode = "401",
                             description = "Unauthorized",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "404",
                             description = "Asset type not found",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     )
             }
     )

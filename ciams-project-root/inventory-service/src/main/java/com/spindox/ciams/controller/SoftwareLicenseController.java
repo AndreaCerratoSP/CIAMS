@@ -1,6 +1,7 @@
 package com.spindox.ciams.controller;
 
 import com.spindox.ciams.dto.SoftwareLicenseDto;
+import com.spindox.ciams.dto.MessageResponseDTO;
 import com.spindox.ciams.service.SoftwareLicenceService;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
@@ -170,7 +171,7 @@ public class SoftwareLicenseController {
     @Operation(
             summary = "Create a new software license",
             description = "Creates a new software license using the provided details and returns the created resource.",
-            security = { @SecurityRequirement(name = "basicAuth") },
+            security = { @SecurityRequirement(name = "bearerAuth") },
             requestBody = @io.swagger.v3.oas.annotations.parameters.RequestBody(
                     description = "Software license details to create",
                     required = true,
@@ -191,12 +192,18 @@ public class SoftwareLicenseController {
                     @ApiResponse(
                             responseCode = "400",
                             description = "Invalid request body",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "401",
                             description = "Unauthorized",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     )
             }
     )
@@ -220,7 +227,7 @@ public class SoftwareLicenseController {
     @Operation(
             summary = "Update a software license by ID",
             description = "Updates the software license identified by the given ID with the provided details and returns the updated resource.",
-            security = { @SecurityRequirement(name = "basicAuth") },
+            security = { @SecurityRequirement(name = "bearerAuth") },
             parameters = {
                     @Parameter(
                             name = "id",
@@ -249,17 +256,26 @@ public class SoftwareLicenseController {
                     @ApiResponse(
                             responseCode = "400",
                             description = "Invalid ID or request body",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "404",
                             description = "Software license not found",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "401",
                             description = "Unauthorized",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     )
             }
     )
@@ -282,7 +298,7 @@ public class SoftwareLicenseController {
     @Operation(
             summary = "Delete a software license by ID",
             description = "Deletes the software license identified by the given ID.",
-            security = { @SecurityRequirement(name = "basicAuth") },
+            security = { @SecurityRequirement(name = "bearerAuth") },
             parameters = {
                     @Parameter(
                             name = "id",
@@ -300,12 +316,19 @@ public class SoftwareLicenseController {
                     @ApiResponse(
                             responseCode = "404",
                             description = "Software license not found",
-                            content = @Content
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
                     ),
                     @ApiResponse(
                             responseCode = "401",
                             description = "Unauthorized",
-                            content = @Content)
+                            content = @Content(
+                                    mediaType = "application/json",
+                                    schema = @Schema(implementation = MessageResponseDTO.class)
+                            )
+                    )
             }
     )
     @DeleteMapping("/{id}")
